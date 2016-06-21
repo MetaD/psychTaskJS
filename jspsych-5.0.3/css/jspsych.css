@@ -8,15 +8,16 @@
 
 /* fonts and type */
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
 html {
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 18px;
   line-height: 1.6em;
+  height: 100%;
 }
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 p {
   clear: both;
@@ -53,7 +54,7 @@ p {
 /* Form elements like input fields and buttons */
 
 input[type="text"] {
-  font-family: 'Open Sans', 'Arial', sans-sefif;
+  font-family: 'Arial', sans-sefif;
   font-size: 14px;
 }
 
@@ -64,7 +65,7 @@ input[type="text"] {
   margin: 0px 8px;
   font-size: 14px;
   font-weight: 400;
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;
   cursor: pointer;
   line-height: 1.4;
   text-align: center;
@@ -86,8 +87,22 @@ input[type="text"] {
 /* Container holding jsPsych content */
 
 .jspsych-display-element {
-  width: 800px;
-  margin: 50px auto 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.jspsych-top {
+  align-items: flex-start;
+}
+
+.jspsych-middle {
+  align-items: center;
+}
+
+.jspsych-content {
+  margin: 50px;
 }
 
 /* jsPsych progress bar */
