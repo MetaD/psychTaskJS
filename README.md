@@ -5,15 +5,14 @@ Questions
   - Instructions
     - need some changes e.g. ***add a screen "looking for partners please wait"?***
     - ***do they still get the money?***
-  - training trials(***how many?***)
+  - training trials
   - "find experimenter if you are confused" ***(change?)***
-  - all the trials (***how many?***)
-    - number (***loop begin?***)
+  - all the trials
+    - number
     - private/share (***'private' & 'share' always same color for whole experiment?***)
     - self
-    - private/share (***loop end?***)
-    - ***breaks? blocks?***
-  - End instructions (***What to do when it ends?***)
+    - private/share
+  - End instructions ***(?)***
   - ***Need full screen?***
 
 - Data?
