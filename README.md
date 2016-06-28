@@ -9,7 +9,7 @@ Questions
   - "find experimenter if you are confused" ***(change?)***
   - all the trials (***how many?***)
     - number (***loop begin?***)
-    - private/share
+    - private/share (***'private' & 'share' always same color for whole experiment?***)
     - self
     - private/share (***loop end?***)
     - ***breaks? blocks?***
