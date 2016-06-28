@@ -62,7 +62,7 @@ var jsPsych = (function() {
       'max_load_time': 30000,
       'skip_load_check': false,
       'fullscreen': false,
-      'default_iti': 1000
+      'default_iti': 0
     };
 
     // override default options if user specifies an option

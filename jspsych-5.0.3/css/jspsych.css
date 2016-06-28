@@ -10,7 +10,8 @@
 
 html {
   font-family: 'Arial', sans-serif;
-  font-size: 18px;
+  font-size: 35px;
+  font-size: 2.2vw;
   line-height: 1.6em;
   height: 100%;
 }
@@ -18,9 +19,17 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: black;
+  color: white;
 }
 p {
   clear: both;
+  margin: 50px;
+  margin: 3vw 4vw;
+}
+ul {
+  margin: 50px;
+  list-style: none;
 }
 .very-small {
   font-size: 50%;
@@ -34,6 +43,60 @@ p {
 .very-large {
   font-size: 150%;
 }
+.green {
+  color: #00ff00;
+}
+.blue {
+  color: #33ffff;
+}
+.yellow {
+  color: #ffff00;
+}
+.fixed-position-below {
+  position: absolute;
+  width: 30em;
+  top: 80%;
+  left: 50%;
+  margin-left: -15em;
+  text-align: center;
+}
+.fixed-position-above {
+  position: absolute;
+  width: 30em;
+  top: 10%;
+  left: 50%;
+  margin-left: -15em;
+  text-align: center;
+}
+.two-cards {
+  position: absolute;
+  width: 800px;
+  height: 280px;
+  margin-top: -140px;
+  margin-left: -400px;
+  width: 60vw;
+  height: 17vw;
+  margin-top: -8.5vw;
+  margin-left: -30vw;
+  top: 50%;
+  text-align: center;
+}
+.cards {
+  width: 280px;
+  height: 280px;
+  width: 17vw;
+  height: 17vw;
+  border: 4px solid;
+}
+.cards.left {
+  float: left;
+}
+.cards.right {
+  float: right;
+}
+.red-border {
+  border: 4px solid red;
+}
 
 /* Classes for changing location of things */
 
@@ -45,6 +108,7 @@ p {
 }
 .center-content {
   text-align: center;
+  vertical-align: center;
 }
 
 .block-center {

@@ -14,7 +14,7 @@ jsPsych.plugins["multi-stim-multi-response"] = (function() {
 
   var plugin = {};
 
-  jsPsych.pluginAPI.registerPreload('multi-stim-multi-response', 'stimuli', 'image');
+  // jsPsych.pluginAPI.registerPreload('multi-stim-multi-response', 'stimuli', 'image');
 
   plugin.trial = function(display_element, trial) {
 

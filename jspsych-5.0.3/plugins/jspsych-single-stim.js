@@ -97,11 +97,17 @@ jsPsych.plugins["single-stim"] = (function() {
       // only record the first response
       if (response.key == -1) {
         response = info;
+        for (var i = 0; i < setTimeoutHandlers.length; i++) {
+          clearTimeout(setTimeoutHandlers[i]);
+        }
       }
 
+      afterChoice(response.key, trial.choices.length);
+
       if (trial.response_ends_trial) {
-        end_trial();
+        setTimeout(end_trial, 1500);
       }
+
     };
 
     // start the response listener
