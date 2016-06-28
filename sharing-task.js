@@ -3,7 +3,7 @@
 var NUM_CARDS = 5,
     NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert also need changes
     NUM_TRAINING = 2,
-    NUM_TRIALS = 10;
+    NUM_TRIALS = 5;
 
 //   Pictures
 var PENNIES = ['<img src="img/penny1.png">', '<img src="img/penny2.png">', '<img src="img/penny3.png">', '<img src="img/penny4.png">'];
@@ -19,7 +19,7 @@ var ROLE_TIME = 1000,    // assigning roles
     NUMBER_TIME = 4000,
     SYNC_TIME = 1000,
     GET_READY_TIME = 2000,
-    NO_ANSWER_SCREEN_TIME = 2000
+    NO_ANSWER_SCREEN_TIME = 2000,
     BREAK_TIME = 5000;
 
 //   Instructions
@@ -30,7 +30,15 @@ var PRESS_SPACE = '<p class="fixed-position-below small">Please press the space 
     NUMBER = '<p class="large fixed-position-above green">NUMBER</p>',
     SELF = '<p class="large fixed-position-above green">SELF</p>',
     SYNC = '<p>Please wait while you and your partner\'s computers are syncing.<br/><br/><br/>Syncing computers. Please wait',
-    BREAK = '<p class="center-content">You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' + BREAK_TIME/1000 + ' seconds.</p>';
+    BREAK = '<p class="center-content">You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' +
+            BREAK_TIME/1000 + ' seconds.</p>',
+    LIKERT_DIV = '<div class="likert">' +
+                    '<div id="one" class="cell"><p>1<br/><span class="small">Strongly disagree</span></p></div>' +
+                    '<div id="two" class="cell"><p>2</p></div>' +
+                    '<div id="three" class="cell"><p>3</p></div>' +
+                    '<div id="four" class="cell"><p>4</p></div>' +
+                    '<div id="five" class="cell"><p>5<br/><span class="small">Strongly agree</span></p></div>' +
+                  '</div>';
 
 
 // HELPER FUNCTIONS
@@ -50,7 +58,7 @@ function random_int(min, max) {  // min and max included
 
 function rand_card_side(privateColor, shareColor) {
     var privSide, shareSide;
-    if (random_int(1, 2) == 1) {
+    if (random_int(1, 2) === 1) {
         privSide = 'left';
         shareSide = 'right';
     } else {
@@ -100,6 +108,54 @@ function afterLikertChoice(response) {
     return chosen;
 }
 
+//   Functions making deep copies of trials
+function newPrivateShareTrial(trial, prevTrialIsNumber) {
+    var copy = jQuery.extend(true, {}, trial);
+
+    // Randomize side
+    var tempPair = rand_card_side(privateColor, shareColor);
+    var privateCardBeginning = tempPair.privateBeginning,
+        shareCardBeginning = tempPair.shareBeginning;
+    // new stimulus
+    copy['stimulus'] = prevTrialIsNumber ? NUMBER : SELF;
+    copy['stimulus'] += '<div class="two-cards">' + privateCardBeginning + PENNIES[random_int(0, 3)] + '</div>';
+    copy['stimulus'] += shareCardBeginning + PENNIES[random_int(0, 3)] + '</div></div>';
+    return copy;
+}
+
+function newPrivateShareLoop(loop, prevTrialIsNumber) {
+    var copy = jQuery.extend(true, {}, loop);
+    copy['timeline'][0] = newPrivateShareTrial(loop['timeline'][0], prevTrialIsNumber);  // only timeline[0] needs new value
+    return copy;
+}
+
+function newLikertTrial (trial, isTraining) {
+    var copy = jQuery.extend(true, {}, trial);
+    // new stimulus
+    copy['stimulus'] = SELF;
+    copy['stimulus'] += '<p class="fixed-position-mid">' + (isTraining ? statements_train[trainStmtIndex++] : statements[statementIndex++]) + '</p>';
+    copy['stimulus'] += LIKERT_DIV;
+    return copy;
+}
+
+function newLikertLoop(loop, isTraining) {
+    var copy = jQuery.extend(true, {}, loop);
+    copy['timeline'][0] = newLikertTrial(loop['timeline'][0], isTraining);  // only timeline[0] needs new value
+    return copy;
+}
+
+function newNumberTrial(trial) {
+    var copy = jQuery.extend(true, {}, trial);
+    // new stimulus
+    copy['stimulus'] = NUMBER + '<p>The number for this trial is</p>';
+    copy['stimulus'] += '<p class="very-large center-content">' + random_int(1, 5).toString() + '</p>';
+    return copy;
+}
+
+// Indexes
+var statementIndex = 0,
+    trainStmtIndex = 0;
+
 $(document).ready(function() {
     // RANDOMIZATION
     //   Choices
@@ -109,9 +165,7 @@ $(document).ready(function() {
 
     shuffle_array(statements);
     shuffle_array(statements_train);
-    var training = true,
-        statementIndex = 0,
-        trainStmtIndex = 0;
+    var training = true;
 
     //  TRIALS
     var syncingScreen = {
@@ -146,23 +200,19 @@ $(document).ready(function() {
         response_ends_trial: false,
     };
 
-    var numberScreen = {
+    var numberScreen = {    // dummy
         type: 'single-stim',
         is_html: true,
-        stimulus: NUMBER +
-                  '<p>The number for this trial is</p>' +
-                  '<p class="very-large center-content">' + random_int(1, 5).toString() + '</p>',
+        stimulus: '',
         choices: [],
         timing_response: NUMBER_TIME,
         response_ends_trial: false,
     };
 
-    var privateShareScreen = {
+    var privateShareScreen = {  // dummy
         type: 'single-stim',
         is_html: true,
-        stimulus: NUMBER +  // TODO or SELF???
-                  '<div class="two-cards">' + privateCardBeginning + PENNIES[random_int(0, 3)] + '</div>' +
-                  shareCardBeginning + PENNIES[random_int(0, 3)] + '</div></div>',
+        stimulus: '',
         choices: ['1', '5'],
         timing_response: PRIVATE_SHARE_TIME,
         response_ends_trial: true,
@@ -192,18 +242,10 @@ $(document).ready(function() {
         }
     }
 
-    var likertScreen = {
+    var likertScreen = {    // dummy
         type: 'single-stim',
         is_html: true,
-        stimulus: SELF +
-                  '<p class="fixed-position-mid">' + (training ? statements_train[trainStmtIndex] : statements[statementIndex]) + '</p>' + // TODO
-                  '<div class="likert">' +
-                    '<div id="one" class="cell"><p>1<br/><span class="small">Strongly disagree</span></p></div>' +
-                    '<div id="two" class="cell"><p>2</p></div>' +
-                    '<div id="three" class="cell"><p>3</p></div>' +
-                    '<div id="four" class="cell"><p>4</p></div>' +
-                    '<div id="five" class="cell"><p>5<br/><span class="small">Strongly agree</span></p></div>' +
-                  '</div>',
+        stimulus: '',
         choices: ['1', '2', '3', '4', '5'],
         timing_response: LIKERT_CHOICE_TIME,
         response_ends_trial: true,
@@ -319,13 +361,42 @@ $(document).ready(function() {
     //   Training trials start
 
     allTimeline.push(
-        syncingScreen
+        newNumberTrial(numberScreen),
+        newNumberTrial(numberScreen),
+        newPrivateShareLoop(privateShareLoop, true),
+        newPrivateShareLoop(privateShareLoop, false),
+        newPrivateShareLoop(privateShareLoop, false),
+        newLikertLoop(likertLoop, true),
+        newLikertLoop(likertLoop, true)
     );
     for (var i = 0; i < NUM_TRAINING; ++i) {
-        allTimeline.push(numberScreen, privateShareLoop);
-        allTimeline.push(likertLoop, privateShareLoop);
-    } 
+        allTimeline.push(
+            newNumberTrial(numberScreen),
+            newPrivateShareLoop(privateShareLoop, true),
+            newLikertLoop(likertLoop, true),
+            newPrivateShareLoop(privateShareLoop, false)
+        );
+    }
 
+    // TODO Instructions here?
+
+    for (var i = 0; i < NUM_TRIALS; ++i) {
+        allTimeline.push(
+            newNumberTrial(numberScreen),
+            newPrivateShareLoop(privateShareLoop, true),
+            newLikertLoop(likertLoop, true),
+            newPrivateShareLoop(privateShareLoop, false)
+        );
+    }
+
+    // End instruction
+    allTimeline.push({
+        type: 'instructions',
+        pages: [
+            'Thank you for participanting!'
+        ],
+        key_forward: 'space',
+    });
 
     jsPsych.init({
         display_element: $('#jspsych-target'),
