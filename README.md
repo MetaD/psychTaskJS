@@ -16,6 +16,7 @@ Questions
   - ***Need full screen?***
 
 - Data?
+  - trial info
   - RT
   - keys pressed
   - ***what else?***
