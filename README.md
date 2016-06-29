@@ -16,9 +16,11 @@ Questions
   - ***Need full screen?***
 
 - Data?
+  - trial info
   - RT
   - keys pressed
   - ***what else?***
 
 - Documentation
 - Cultural Difference?
+- "I visit a part of Boston I've never been to"???
