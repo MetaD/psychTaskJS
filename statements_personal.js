@@ -173,7 +173,7 @@ var statements = [  // length = 182
 "I think hockey is an interesting sport to watch",
 "I toss a Frisbee around in the park",
 "I value learning about other cultures",
-"I visit a part of Boston Ive never been to",
+"I visit a part of Boston I've never been to",
 "I want a super power",
 "I want to always be told the truth",
 "I want to go away with friends for spring break",

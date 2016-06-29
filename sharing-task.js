@@ -3,7 +3,7 @@
 var NUM_CARDS = 5,
     NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert also need changes
     NUM_TRAINING = 2,
-    NUM_TRIALS_PER_TYPE_PER_BLOCK = 5;   // there's one block before break and one block after
+    NUM_TRIALS_PER_TYPE_PER_BLOCK = 5;   // two blocks separated by a break
 
 //   Pictures
 var PENNIES = ['<img src="img/penny1.png">', '<img src="img/penny2.png">', '<img src="img/penny3.png">', '<img src="img/penny4.png">'];
@@ -13,11 +13,11 @@ var shareColor = random_int(1, 2) == 1 ? 'blue' : 'yellow',
     privateColor = shareColor == 'blue' ? 'yellow' : 'blue';
 
 //   Times
-var ROLE_TIME = 1000,    // assigning roles
+var ASSIGNING_ROLE_TIME = 1000,
     PRIVATE_SHARE_TIME = 2500,
     LIKERT_CHOICE_TIME = 4000,
     NUMBER_TIME = 4000,
-    SYNC_TIME = 1000,
+    SYNC_TIME = random_int(5000, 10000),
     GET_READY_TIME = 2000,
     NO_ANSWER_SCREEN_TIME = 2000,
     BREAK_TIME = 5000;
@@ -322,8 +322,8 @@ $(document).ready(function() {
             '<p>Assigning your role. Please wait...</p>',
         ],
         choices: [],
-        timing_stim: [ROLE_TIME/4, ROLE_TIME/4, ROLE_TIME/4, ROLE_TIME/4],
-        timing_response: ROLE_TIME,
+        timing_stim: [ASSIGNING_ROLE_TIME/4, ASSIGNING_ROLE_TIME/4, ASSIGNING_ROLE_TIME/4, ASSIGNING_ROLE_TIME/4],
+        timing_response: ASSIGNING_ROLE_TIME,
         response_ends_trial: false,
     }, {
         type: 'instructions',
@@ -379,7 +379,9 @@ $(document).ready(function() {
     */
 
     //   Training trials
+    allTimeline.push(syncingScreen);
     addTrialsRandomly(NUM_TRAINING, true);
+
     //   Instruction
     allTimeline.push({
         type: 'instructions',
@@ -389,12 +391,18 @@ $(document).ready(function() {
         ],
         key_forward: '=',
     });
+
     //   First block of actual trials
+    allTimeline.push(syncingScreen);
     addTrialsRandomly(NUM_TRIALS_PER_TYPE_PER_BLOCK, false);
+
     //   Break
     allTimeline.push(breakScreen);
+
     //   Second block of actual trials
+    allTimeline.push(syncingScreen);
     addTrialsRandomly(NUM_TRIALS_PER_TYPE_PER_BLOCK, false);
+
     //   Ending instruction
     allTimeline.push({
         type: 'instructions',
@@ -404,6 +412,7 @@ $(document).ready(function() {
         key_forward: 'space',
     });
 
+    // INITIALIZATION
     jsPsych.init({
         display_element: $('#jspsych-target'),
         timeline: allTimeline,
