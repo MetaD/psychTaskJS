@@ -3,7 +3,7 @@
 var NUM_CARDS = 5,
     NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert also need changes
     NUM_TRAINING = 2,
-    NUM_TRIALS = 5;
+    NUM_TRIALS_PER_TYPE_PER_BLOCK = 5;   // there's one block before break and one block after
 
 //   Pictures
 var PENNIES = ['<img src="img/penny1.png">', '<img src="img/penny2.png">', '<img src="img/penny3.png">', '<img src="img/penny4.png">'];
@@ -72,13 +72,18 @@ function rand_card_side(privateColor, shareColor) {
 }
 
 function afterChoice(response, num_choices) {
+    if (num_choices !== 2 && num_choices !== 5) {
+        return;
+    }
     var chosen;
-    if (num_choices == 2) {  // private/share choice
+    if (num_choices === 2) {  // private/share choice
         chosen = afterPrivateShareChoice(response);
-        setTimeout(function() {
-            var sent = '<p class="fixed-position-below small green">Information sent</p>';
-            $('#jspsych-single-stim-stimulus').append(sent);
-        }, random_int(300, 600));
+        if (chosen.innerHTML.indexOf('SHARE') != -1) {  // SHARE was chosen
+            setTimeout(function() {
+                var sent = '<p class="fixed-position-below small green">Information sent</p>';
+                $('#jspsych-single-stim-stimulus').append(sent);
+            }, random_int(300, 600));
+        }
     } else {                 // Likert choice
         chosen = afterLikertChoice(response);
     }
@@ -276,6 +281,28 @@ $(document).ready(function() {
     }
 
 
+    // add numTrialsPerType self trials and numTrialsPerType number trials in random order
+    function addTrialsRandomly(numTrialsPerType, isTraining) {
+        for (var i = 0, j = 0; i < numTrialsPerType || j < numTrialsPerType;) {
+            var randInt = random_int(1, 2);
+            if (i < numTrialsPerType && (randInt === 1 || j === numTrialsPerType)) {
+                allTimeline.push(
+                    newNumberTrial(numberScreen),
+                    newPrivateShareLoop(privateShareLoop, true)
+                );
+                ++i;
+            }
+            if (j < numTrialsPerType && (randInt === 2 || i === numTrialsPerType)) {
+                allTimeline.push(
+                    newLikertLoop(likertLoop, isTraining),
+                    newPrivateShareLoop(privateShareLoop, false)
+                );
+                ++j;
+            }
+        }
+    }
+
+
     // EXPERIMENT START
     var allTimeline = [];
     //   Instructions
@@ -348,7 +375,13 @@ $(document).ready(function() {
 
         ],
         key_forward: 'space',
-    }, {
+    });
+    */
+
+    //   Training trials
+    addTrialsRandomly(NUM_TRAINING, true);
+    //   Instruction
+    allTimeline.push({
         type: 'instructions',
         pages: [
             '<p>Please find the experimenter now to ask any questions about the task.<br/><br/>If you understand these instructions, please find the experimenter to BEGIN</p>' +
@@ -356,40 +389,13 @@ $(document).ready(function() {
         ],
         key_forward: '=',
     });
-    */
-    //   End of instructions
-    //   Training trials start
-
-    allTimeline.push(
-        newNumberTrial(numberScreen),
-        newNumberTrial(numberScreen),
-        newPrivateShareLoop(privateShareLoop, true),
-        newPrivateShareLoop(privateShareLoop, false),
-        newPrivateShareLoop(privateShareLoop, false),
-        newLikertLoop(likertLoop, true),
-        newLikertLoop(likertLoop, true)
-    );
-    for (var i = 0; i < NUM_TRAINING; ++i) {
-        allTimeline.push(
-            newNumberTrial(numberScreen),
-            newPrivateShareLoop(privateShareLoop, true),
-            newLikertLoop(likertLoop, true),
-            newPrivateShareLoop(privateShareLoop, false)
-        );
-    }
-
-    // TODO Instructions here?
-
-    for (var i = 0; i < NUM_TRIALS; ++i) {
-        allTimeline.push(
-            newNumberTrial(numberScreen),
-            newPrivateShareLoop(privateShareLoop, true),
-            newLikertLoop(likertLoop, true),
-            newPrivateShareLoop(privateShareLoop, false)
-        );
-    }
-
-    // End instruction
+    //   First block of actual trials
+    addTrialsRandomly(NUM_TRIALS_PER_TYPE_PER_BLOCK, false);
+    //   Break
+    allTimeline.push(breakScreen);
+    //   Second block of actual trials
+    addTrialsRandomly(NUM_TRIALS_PER_TYPE_PER_BLOCK, false);
+    //   Ending instruction
     allTimeline.push({
         type: 'instructions',
         pages: [

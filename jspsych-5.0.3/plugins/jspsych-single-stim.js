@@ -89,6 +89,10 @@ jsPsych.plugins["single-stim"] = (function() {
 
     // function to handle responses by the subject
     var after_response = function(info) {
+      if (trial.choices.length === 0) {
+        // ignore this response
+        return;
+      }
 
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
