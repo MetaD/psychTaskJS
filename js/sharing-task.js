@@ -146,13 +146,7 @@ $(document).ready(function() {
     addTrialsRandomly(NUM_TRAINING, true);
 
     //   Instruction
-    allTimeline.push({
-        type: 'instructions',
-        pages: [
-            '<p>Please find the experimenter now to ask any questions about the task.<br/><br/>If you understand these instructions, please find the experimenter to BEGIN</p>',
-        ],
-        key_forward: '=',
-    });
+    allTimeline.push(middleInstruction);
 
     //   First block of actual trials
     allTimeline.push(syncingScreen);
@@ -165,14 +159,8 @@ $(document).ready(function() {
     allTimeline.push(syncingScreen);
     addTrialsRandomly(NUM_TRIALS_PER_TYPE_PER_BLOCK, false);
 
-    //   Ending instruction
-    allTimeline.push({
-        type: 'instructions',
-        pages: [
-            'Thank you for participanting!'
-        ],
-        key_forward: 'space',
-    });
+    //   Ending
+    allTimeline.push(endInstruction);
 
     // INITIALIZATION
     jsPsych.init({

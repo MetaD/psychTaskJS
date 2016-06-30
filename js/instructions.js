@@ -47,7 +47,7 @@ var beginningInstructions = [
 
             '<p>' +
                 'On some trials, you will be shown a number. On these trials, you will see the word NUMBER at the top of the screen, ' +
-                'and you will be presented with a number between 1 and ' + NUM_CARDS + '. This screen will stay up for ' + NUMBER_TIME/1000 + ' seconds.' +
+                'and you will be presented with a number between 1 and ' + NUM_LIKERT_CHOICES + '. This screen will stay up for ' + NUMBER_TIME/1000 + ' seconds.' +
             '</p>' +
             PRESS_SPACE,
 
@@ -79,7 +79,7 @@ var beginningInstructions = [
                     '[3 pennies]'+ THREE_TAB + TWO_TAB + '[4 pennies]<br/><br/>' +
                 '</li>' +
                 '<li>' +
-                    'You should make your choice by pressing 1 for the left option (SHARE) and ' + NUM_CARDS + ' for the right option (PRIVATE). ' +
+                    'You should make your choice by pressing 1 for the left option (SHARE) and ' + NUM_LIKERT_CHOICES + ' for the right option (PRIVATE). ' +
                     'You will have ' + PRIVATE_SHARE_TIME/1000 + ' seconds to make your choice. ' +
                     'This screen will stay up for the entire ' + PRIVATE_SHARE_TIME/1000 + ' seconds.' +
                 '</li>' +
@@ -108,3 +108,22 @@ var beginningInstructions = [
         key_forward: 'space',
     }
 ];
+
+var middleInstruction = {   // This appears after training
+    type: 'instructions',
+    pages: [
+        '<p>' +
+            'Please find the experimenter now to ask any questions about the task.<br/><br/>' +
+            'If you understand these instructions, please find the experimenter to BEGIN' +
+        '</p>',
+    ],
+    key_forward: '=',
+}
+
+var endInstruction = {
+    type: 'instructions',
+    pages: [
+        '<p>Thank you for participanting!</p>'
+    ],
+    key_forward: 'space',
+}

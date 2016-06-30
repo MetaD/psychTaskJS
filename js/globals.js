@@ -1,7 +1,6 @@
 // CONSTANTS
 //   Experimental settings
-var NUM_CARDS = 5,
-    NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert must also change
+var NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert must also change
     NUM_TRAINING = 1,
     NUM_TRIALS_PER_TYPE_PER_BLOCK = 1;   // there are two blocks separated by a break
 
