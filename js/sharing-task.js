@@ -8,10 +8,10 @@ $(document).ready(function() {
         type: 'multi-stim-multi-response',
         is_html: true,
         stimuli: [
-            '<p>' + SYNC + '&nbsp;&nbsp;&nbsp;</p>',
-            '<p>' + SYNC + '.&nbsp;&nbsp;</p>',
-            '<p>' + SYNC + '..&nbsp;</p>',
-            '<p>' + SYNC + '...</p>',
+            '<p>' + SYNC_INSTR + '&nbsp;&nbsp;&nbsp;</p>',
+            '<p>' + SYNC_INSTR + '.&nbsp;&nbsp;</p>',
+            '<p>' + SYNC_INSTR + '..&nbsp;</p>',
+            '<p>' + SYNC_INSTR + '...</p>',
             '<p>Get Ready!</p>'
         ],
         choices: [],
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     var breakStimuli = [], breakTiming = [];
     for (var i = BREAK_TIME/1000; i > 0; --i) {
-        breakStimuli.push('<p class="center-content">' + BREAK + '</p><p class="large center-content"><br/>' + i.toString() + '</p>');
+        breakStimuli.push('<p class="center-content">' + BREAK_INSTR + '</p><p class="large center-content"><br/>' + i.toString() + '</p>');
         breakTiming.push(1000);
     }
 
