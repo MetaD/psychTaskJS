@@ -5,7 +5,7 @@ var BREAK_INSTR = 'You are half way done!  Please take a short break now.<br/><b
 
 var WELCOME_INSTR = 'Welcome to the study!<br/><br/>Please wait while we look for a partner for you';
 
-var PARTNER_FOUND_INSTR = 'A connection has been established to your study partner\'s computer now.<br/><br/>' +
+var PARTNER_FOUND_INSTR = 'You are now connected to your study partner\'s computer.<br/><br/>' +
                 'Please press the space bar to find out your role.';
 
 var ASSIGN_ROLE_INSTR = 'Assigning your role. Please wait';
