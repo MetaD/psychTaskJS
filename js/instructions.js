@@ -1,9 +1,12 @@
 // Instruction texts
-var PRESS_SPACE_INSTR = 'Please press the space bar to continue',
-    SYNC_INSTR = 'Please wait while you and your partner\'s computers are syncing.<br/><br/><br/>Syncing computers. Please wait',
-    BREAK_INSTR = 'You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' + BREAK_TIME/1000 + ' seconds.';
+var PRESS_SPACE_INSTR = 'Please press the space bar to continue';
+var SYNC_INSTR = 'Please wait while you and your partner\'s computers are syncing.<br/><br/><br/>Syncing computers. Please wait';
+var BREAK_INSTR = 'You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' + BREAK_TIME/1000 + ' seconds.';
 
-var WELCOME_INSTR = 'Welcome to the study!<br/><br/>Press the space bar to find out your role.';
+var WELCOME_INSTR = 'Welcome to the study!<br/><br/>Please wait while we look for a partner for you';
+
+var PARTNER_FOUND_INSTR = 'A connection has been established to your study partner\'s computer now.<br/><br/>' +
+                'Please press the space bar to find out your role.';
 
 var ASSIGN_ROLE_INSTR = 'Assigning your role. Please wait';
 
@@ -58,16 +61,16 @@ var EXPERIMENT_END_INSTR = 'Thank you for participanting!';
 
 
 // Add HTML
-WELCOME_INSTR = '<p class="center-content">' + WELCOME_INSTR + '</p>';
 PRESS_SPACE_INSTR = '<p class="fixed-position-below small">' + PRESS_SPACE_INSTR + '</p>';
+PARTNER_FOUND_INSTR = '<p class="center-content">' + PARTNER_FOUND_INSTR + '</p>';
 ROLE_ASSIGNED_INSTR = '<p class="small">' + ROLE_ASSIGNED_INSTR + '</p>';
 SHARER_DUTY_INSTR = '<p>' + SHARER_DUTY_INSTR + '</p>';
 NUMBER_TRIAL_INSTR = '<p>' + NUMBER_TRIAL_INSTR + '</p>';
 SELF_TRIAL_INSTR = '<p class="small">' + SELF_TRIAL_INSTR + '</p>';
 PRIVATE_SHARE_INSTR = '<p class="small">' + PRIVATE_SHARE_INSTR + '</p>';
 PRIVATE_SHARE_EXAMPLE_INSTR_1 = '<ul class="small">' + '<li>' + PRIVATE_SHARE_EXAMPLE_INSTR_1 + '</li>';
-PRIVATE_SHARE_EXAMPLE_INSTR_2 = '<li style="text-align: center;">' + PRIVATE_SHARE_EXAMPLE_INSTR_2 + '</li>';
-PRIVATE_SHARE_EXAMPLE_INSTR_3 = '<li>' + PRIVATE_SHARE_EXAMPLE_INSTR_3 + '</li>' + '</ul>'
+PRIVATE_SHARE_EXAMPLE_INSTR_2 = '<li class="center-content">' + PRIVATE_SHARE_EXAMPLE_INSTR_2 + '</li>';
+PRIVATE_SHARE_EXAMPLE_INSTR_3 = '<li>' + PRIVATE_SHARE_EXAMPLE_INSTR_3 + '</li>' + '</ul>';
 PRIVATE_SHARE_EXAMPLE_INSTR = PRIVATE_SHARE_EXAMPLE_INSTR_1 + PRIVATE_SHARE_EXAMPLE_INSTR_2 + PRIVATE_SHARE_EXAMPLE_INSTR_3;
 EARNING_INSTR = '<p>' + EARNING_INSTR + '</p>';
 RECEIVER_INSTR = '<p>' + RECEIVER_INSTR + '</p>';
@@ -79,8 +82,22 @@ EXPERIMENT_END_INSTR = '<p>' + EXPERIMENT_END_INSTR + '</p>';
 // Create jsPsych-instruction objects
 var beginningInstructions = [
     {
+        type: 'multi-stim-multi-response',
+        is_html: true,
+        stimuli: [
+            '<p>' + WELCOME_INSTR + '&nbsp;&nbsp;&nbsp;</p>',
+            '<p>' + WELCOME_INSTR + '.&nbsp;&nbsp;</p>',
+            '<p>' + WELCOME_INSTR + '..&nbsp;</p>',
+            '<p>' + WELCOME_INSTR + '...</p>',
+        ],
+        choices: [],
+        timing_stim: [FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4],
+        timing_response: FIND_PARTNER_TIME,
+        response_ends_trial: false,
+    },
+    {
         type: 'instructions',
-        pages: [WELCOME_INSTR],
+        pages: [PARTNER_FOUND_INSTR],
         key_forward: 'space',
     },
     {
