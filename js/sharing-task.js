@@ -162,10 +162,17 @@ $(document).ready(function() {
     //   Ending
     allTimeline.push(endInstruction);
 
-    // INITIALIZATION
-    jsPsych.init({
-        display_element: $('#jspsych-target'),
-        timeline: allTimeline,
-        // fullscreen: true
-    });
+
+    // START
+    function startExperiment() {
+        // Start the experiment
+        jsPsych.init({
+            display_element: $('#jspsych-target'),
+            timeline: allTimeline,
+            // fullscreen: true
+        });
+    }
+
+    // Load images and then call startExperiment()
+    jsPsych.pluginAPI.preloadImages(PENNIES, startExperiment);
 });

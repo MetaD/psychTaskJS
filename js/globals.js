@@ -15,7 +15,7 @@ var ASSIGNING_ROLE_TIME = 1000,
     BREAK_TIME = 10000;
 
 //   Pictures
-var PENNIES = ['<img src="img/penny1.png">', '<img src="img/penny2.png">', '<img src="img/penny3.png">', '<img src="img/penny4.png">'];
+var PENNIES = ['img/penny1.png', 'img/penny2.png', 'img/penny3.png', 'img/penny4.png'];
 
 //   Texts
 var TAB = '&nbsp;&nbsp;&nbsp;&nbsp;',
@@ -114,8 +114,8 @@ function newPrivateShareTrial(trial, prevTrialIsNumber) {
         shareCardBeginning = tempPair.shareBeginning;
     // new stimulus
     copy['stimulus'] = prevTrialIsNumber ? NUMBER : SELF;
-    copy['stimulus'] += '<div class="two-cards">' + privateCardBeginning + PENNIES[random_int(0, 3)] + '</div>';
-    copy['stimulus'] += shareCardBeginning + PENNIES[random_int(0, 3)] + '</div></div>';
+    copy['stimulus'] += '<div class="two-cards">' + privateCardBeginning + '<img src="' + PENNIES[random_int(0, 3)] + '"></div>';
+    copy['stimulus'] += shareCardBeginning + '<img src="' + PENNIES[random_int(0, 3)] + '"></div></div>';
     return copy;
 }
 
