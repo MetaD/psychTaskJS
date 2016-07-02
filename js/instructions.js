@@ -3,7 +3,8 @@ var PRESS_SPACE_INSTR = 'Please press the space bar to continue';
 var SYNC_INSTR = 'Please wait while you and your partner\'s computers are syncing.<br/><br/><br/>Syncing computers. Please wait';
 var BREAK_INSTR = 'You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' + BREAK_TIME/1000 + ' seconds.';
 
-var WELCOME_INSTR = 'Welcome to the study!<br/><br/>Please wait while we look for a partner for you';
+var WELCOME_INSTR = 'Welcome to the study!<br/><br/>'
+var FIND_PARTNER_INSTR = 'Please wait while we look for a partner for you';
 
 var PARTNER_FOUND_INSTR = 'You are now connected to your study partner\'s computer.<br/><br/>' +
                 'Please press the space bar to find out your role.';
@@ -62,6 +63,7 @@ var EXPERIMENT_END_INSTR = 'Thank you for participanting!';
 
 // Add HTML
 PRESS_SPACE_INSTR = '<p class="fixed-position-below small">' + PRESS_SPACE_INSTR + '</p>';
+WELCOME_INSTR = '<p class="center-content">' + WELCOME_INSTR + '</p><p>' + FIND_PARTNER_INSTR;
 PARTNER_FOUND_INSTR = '<p class="center-content">' + PARTNER_FOUND_INSTR + '</p>';
 ROLE_ASSIGNED_INSTR = '<p class="small">' + ROLE_ASSIGNED_INSTR + '</p>';
 SHARER_DUTY_INSTR = '<p>' + SHARER_DUTY_INSTR + '</p>';
@@ -85,10 +87,10 @@ var beginningInstructions = [
         type: 'multi-stim-multi-response',
         is_html: true,
         stimuli: [
-            '<p>' + WELCOME_INSTR + '&nbsp;&nbsp;&nbsp;</p>',
-            '<p>' + WELCOME_INSTR + '.&nbsp;&nbsp;</p>',
-            '<p>' + WELCOME_INSTR + '..&nbsp;</p>',
-            '<p>' + WELCOME_INSTR + '...</p>',
+            WELCOME_INSTR + '&nbsp;&nbsp;&nbsp;</p>',
+            WELCOME_INSTR + '.&nbsp;&nbsp;</p>',
+            WELCOME_INSTR + '..&nbsp;</p>',
+            WELCOME_INSTR + '...</p>',
         ],
         choices: [],
         timing_stim: [FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4, FIND_PARTNER_TIME/4],

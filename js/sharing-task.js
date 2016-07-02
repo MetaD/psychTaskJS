@@ -43,6 +43,14 @@ $(document).ready(function() {
         choices: [],
         timing_response: NUMBER_TIME,
         response_ends_trial: false,
+        on_finish: function(data) {
+            var strBeforeNum = '"very-large center-content">';
+            var number = parseInt(data.stimulus[data.stimulus.indexOf(strBeforeNum) + strBeforeNum.length]);
+            jsPsych.data.addDataToLastTrial({
+                type: 'number',
+                number: number
+            });
+        }
     };
 
     var privateShareScreen = {  // dummy
@@ -52,6 +60,57 @@ $(document).ready(function() {
         choices: ['1', '5'],
         timing_response: PRIVATE_SHARE_TIME,
         response_ends_trial: true,
+        on_finish: function(data) {
+            var trialType = (data.stimulus.indexOf('>SELF<') === -1) ? 'number-choice' : 'self-choice';
+
+            // get values
+            var left, right, privateVal, shareVal, earnedVal;
+            var firstVal = parseInt(data.stimulus[data.stimulus.indexOf('penny') + 5]),
+                secondVal = parseInt(data.stimulus[data.stimulus.lastIndexOf('penny') + 5]);
+            var shareIsFirst = data.stimulus.indexOf('SHARE') < data.stimulus.indexOf('PRIVATE'),
+                leftIsFirst = data.stimulus.indexOf('left-side') < data.stimulus.indexOf('right-side');
+            if ((shareIsFirst && leftIsFirst) || (!shareIsFirst && !leftIsFirst)) {
+                // 'share' is on the left side
+                left = 'share';
+                right = 'private';
+            } else {
+                // 'private' is on the left side
+                left = 'private';
+                right = 'share';
+            }
+            if (shareIsFirst) {
+                shareVal = firstVal;
+                privateVal = secondVal;
+            } else {
+                privateVal = firstVal;
+                shareVal = secondVal;
+            }
+
+            // get response and earning
+            var response;
+            switch (data.key_press) {
+            case 49:
+                response = left;
+                earnedVal = (response === 'share') ? shareVal : privateVal;
+                break;
+            case 53:
+                response = right;
+                earnedVal = (response === 'share') ? shareVal : privateVal;
+                break;
+            default:
+                response = 'no-answer';
+                earnedVal = 0;
+                break;
+            }
+
+            jsPsych.data.addDataToLastTrial({
+                type: trialType,
+                response: response,
+                private_value: privateVal,
+                share_value: shareVal,
+                earned_value: earnedVal
+            });
+        }
     };
 
     var privateShareNoAnswer = {
@@ -85,6 +144,28 @@ $(document).ready(function() {
         choices: ['1', '2', '3', '4', '5'],
         timing_response: LIKERT_CHOICE_TIME,
         response_ends_trial: true,
+        on_finish: function(data) {
+            var strBeforeStatement = '<p class="fixed-position-mid">',
+                strAfterStatement = '</p><div class="likert">';
+            var statementStartIdx = data.stimulus.indexOf(strBeforeStatement) + strBeforeStatement.length,
+                statementEndIdx = data.stimulus.indexOf(strAfterStatement);
+            var statement = data.stimulus.substring(statementStartIdx, statementEndIdx);
+
+            var response;
+            switch (data.key_press) {
+                case 49: response = 1; break;
+                case 50: response = 2; break;
+                case 51: response = 3; break;
+                case 52: response = 4; break;
+                case 53: response = 5; break;
+                default: response = 'no-answer'; break;
+            }
+            jsPsych.data.addDataToLastTrial({
+                type: 'self',
+                statement: statement,
+                number: response,
+            });
+        }
     }
 
     var likertNoAnswer = {
@@ -169,7 +250,9 @@ $(document).ready(function() {
         jsPsych.init({
             display_element: $('#jspsych-target'),
             timeline: allTimeline,
-            // fullscreen: true
+            on_finish: function() {
+                // Save data
+            }
         });
     }
 
