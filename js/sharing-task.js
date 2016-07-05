@@ -98,7 +98,7 @@ $(document).ready(function() {
                 earnedVal = (response === 'share') ? shareVal : privateVal;
                 break;
             default:
-                response = 'no-answer';
+                response = null;
                 earnedVal = 0;
                 break;
             }
@@ -158,7 +158,7 @@ $(document).ready(function() {
                 case 51: response = 3; break;
                 case 52: response = 4; break;
                 case 53: response = 5; break;
-                default: response = 'no-answer'; break;
+                default: response = null; break;
             }
             jsPsych.data.addDataToLastTrial({
                 type: 'self',
@@ -251,6 +251,39 @@ $(document).ready(function() {
             display_element: $('#jspsych-target'),
             timeline: allTimeline,
             on_finish: function() {
+                // A helper function creating an associative array
+                function getInitialDistribution() {
+                    var dist = {};
+                    for (var i = -3; i < 4; ++i) {
+                        dist[i] = [0, 0];   // when (value_of_share - value_of_private === i): [num_of_shared_trials, total_num_of_-3_trials]
+                    }
+                    return dist;
+                }
+
+                var data = jsPsych.data.getData();
+                // Process data
+                var totalEarning = 0,
+                    numChoiceDistribution = getInitialDistribution(),
+                    selfChoiceDistribution = getInitialDistribution();
+
+                for (var i in data) {
+                    var trialData = data[i];
+                    if (!trialData.type || !trialData.response) {
+                        continue;
+                    }
+                    if (trialData.type === 'self-choice' || trialData.type === 'number-choice') {
+                        totalEarning += trialData.earned_value;
+
+                        var relativeValue = trialData.share_value - trialData.private_value;
+                        var dist = (trialData.type === 'self-choice') ? selfChoiceDistribution : numChoiceDistribution;
+                        var relValArray = dist[relativeValue];
+                        ++relValArray[1];
+                        if (trialData.response === 'share') {
+                            ++relValArray[0];
+                        }
+                    }
+                }
+                console.log([totalEarning, selfChoiceDistribution, numChoiceDistribution]);
                 // Save data
             }
         });

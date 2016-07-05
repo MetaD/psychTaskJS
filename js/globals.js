@@ -5,15 +5,15 @@ var NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related 
     NUM_TRIALS_PER_TYPE_PER_BLOCK = 1;   // there are two blocks separated by a break
 
 //   Times (in ms)
-var FIND_PARTNER_TIME = random_int(3000, 7000),
-    ASSIGNING_ROLE_TIME = 1000,
+var FIND_PARTNER_TIME = random_int(300, 700),
+    ASSIGNING_ROLE_TIME = random_int(100, 1000),
     PRIVATE_SHARE_TIME = 2500,
     LIKERT_CHOICE_TIME = 4000,
-    NUMBER_TIME = 4000,
-    SYNC_TIME = random_int(2000, 5000),
-    GET_READY_TIME = 2000,
-    NO_ANSWER_SCREEN_TIME = 2000,
-    BREAK_TIME = 10000;
+    NUMBER_TIME = 400,
+    SYNC_TIME = random_int(200, 500),
+    GET_READY_TIME = 200,
+    NO_ANSWER_SCREEN_TIME = 200,
+    BREAK_TIME = 1000;
 
 //   Pictures
 var PENNIES = ['img/penny1.png', 'img/penny2.png', 'img/penny3.png', 'img/penny4.png'];
