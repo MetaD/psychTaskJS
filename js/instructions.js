@@ -1,5 +1,6 @@
 // Instruction texts
-var PRESS_SPACE_INSTR = 'Please press the space bar to continue';
+var CONTINUE_INSTR = 'Please press right arrow to continue';
+var CONTINUE_BACK_INSTR = 'Please press right arrow to continue, or left arrow to go back';
 var SYNC_INSTR = 'Please wait while you and your partner\'s computers are syncing.<br/><br/><br/>Syncing computers. Please wait';
 var BREAK_INSTR = 'You are half way done!  Please take a short break now.<br/><br/>The task will resume in ' + BREAK_TIME/1000 + ' seconds.';
 
@@ -36,11 +37,13 @@ var PRIVATE_SHARE_INSTR = 'After each NUMBER and SELF trial, you will have to ch
                 'Each of these choices will be paired with a variable amount of money, between 1 and 4 cents, ' +
                 'that you can earn by choosing that option.';
 
-var PRIVATE_SHARE_EXAMPLE_INSTR_1 = 'For example: you may be given the option of sharing your SELF answer and making $0.03, ' +
-                    'or keeping your SELF answer private and making $0.04.<br/><br/>';
+var PRIVATE_SHARE_EXAMPLE_IMG = ['<img class="reward" src="' + REWARDS[2] + '">', '<img class="reward" src="' + REWARDS[3] + '">'];
 
-var PRIVATE_SHARE_EXAMPLE_INSTR_2 = 'SHARE' + THREE_TAB + THREE_TAB + 'PRIVATE<br/><br/>' +
-                    '[3 pennies]'+ THREE_TAB + TWO_TAB + '[4 pennies]<br/><br/>';
+var PRIVATE_SHARE_EXAMPLE_INSTR_1 = 'For example: you may be given the option of sharing your SELF answer and earning 3 stars, ' +
+                    'or keeping your SELF answer private and earning 4 stars.<br/><br/>';
+
+var PRIVATE_SHARE_EXAMPLE_INSTR_2 = 'SHARE' + THREE_TAB + THREE_TAB + 'PRIVATE<br/>' +
+                    PRIVATE_SHARE_EXAMPLE_IMG[0] + THREE_TAB + THREE_TAB + PRIVATE_SHARE_EXAMPLE_IMG[1] + '<br/>';
 
 var PRIVATE_SHARE_EXAMPLE_INSTR_3 = 'You should make your choice by pressing 1 for the left option (SHARE) and ' + NUM_LIKERT_CHOICES +
                     ' for the right option (PRIVATE). You will have ' + PRIVATE_SHARE_TIME/1000 + ' seconds to make your choice. ' +
@@ -62,7 +65,8 @@ var EXPERIMENT_END_INSTR = 'Thank you for participanting!';
 
 
 // Add HTML
-PRESS_SPACE_INSTR = '<p class="fixed-position-below small">' + PRESS_SPACE_INSTR + '</p>';
+CONTINUE_INSTR = '<p class="fixed-position-below small">' + CONTINUE_INSTR + '</p>';
+CONTINUE_BACK_INSTR =  '<p class="fixed-position-below small">' + CONTINUE_BACK_INSTR + '</p>';
 WELCOME_INSTR = '<p class="center-content">' + WELCOME_INSTR + '</p><p>' + FIND_PARTNER_INSTR;
 PARTNER_FOUND_INSTR = '<p class="center-content">' + PARTNER_FOUND_INSTR + '</p>';
 ROLE_ASSIGNED_INSTR = '<p class="small">' + ROLE_ASSIGNED_INSTR + '</p>';
@@ -79,6 +83,7 @@ RECEIVER_INSTR = '<p>' + RECEIVER_INSTR + '</p>';
 TRAINING_START_INSTR = '<p>' + TRAINING_START_INSTR + '</p>';
 TRAINING_END_INSTR = '<p>' + TRAINING_END_INSTR + '</p>';
 EXPERIMENT_END_INSTR = '<p>' + EXPERIMENT_END_INSTR + '</p>';
+INFO_SENT_INSTR = '<p class="fixed-position-below small ' + INFO_SENT_COLOR + '">' + INFO_SENT + '</p>';
 
 
 // Create jsPsych-instruction objects
@@ -100,7 +105,7 @@ var beginningInstructions = [
     {
         type: 'instructions',
         pages: [PARTNER_FOUND_INSTR],
-        key_forward: 'space',
+        key_forward: 'space'
     },
     {
         type: 'multi-stim-multi-response',
@@ -118,17 +123,17 @@ var beginningInstructions = [
     },
     {
         type: 'instructions',
-        pages: [ROLE_ASSIGNED_INSTR + PRESS_SPACE_INSTR,
-                SHARER_DUTY_INSTR + PRESS_SPACE_INSTR,
-                NUMBER_TRIAL_INSTR + PRESS_SPACE_INSTR,
-                SELF_TRIAL_INSTR + PRESS_SPACE_INSTR,
-                PRIVATE_SHARE_INSTR + PRESS_SPACE_INSTR,
-                PRIVATE_SHARE_EXAMPLE_INSTR + PRESS_SPACE_INSTR,
-                EARNING_INSTR + PRESS_SPACE_INSTR,
-                RECEIVER_INSTR + PRESS_SPACE_INSTR,
-                TRAINING_START_INSTR + PRESS_SPACE_INSTR
-                ],
-        key_forward: 'space',
+        pages: [
+                    ROLE_ASSIGNED_INSTR + CONTINUE_INSTR,
+                    SHARER_DUTY_INSTR + CONTINUE_BACK_INSTR,
+                    NUMBER_TRIAL_INSTR + CONTINUE_BACK_INSTR,
+                    SELF_TRIAL_INSTR + CONTINUE_BACK_INSTR,
+                    PRIVATE_SHARE_INSTR + CONTINUE_BACK_INSTR,
+                    PRIVATE_SHARE_EXAMPLE_INSTR + CONTINUE_BACK_INSTR,
+                    EARNING_INSTR + CONTINUE_BACK_INSTR,
+                    RECEIVER_INSTR + CONTINUE_BACK_INSTR,
+                    TRAINING_START_INSTR + CONTINUE_BACK_INSTR
+                ]
     }
 ];
 
@@ -141,5 +146,4 @@ var middleInstruction = {   // This appears after training
 var endInstruction = {
     type: 'instructions',
     pages: [EXPERIMENT_END_INSTR],
-    key_forward: 'space',
 }

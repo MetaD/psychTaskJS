@@ -7,6 +7,8 @@ Issues
   - "I would like to travel more to _states_ in the _United States_"
   - "I would like to travel to countries outside the _United States_"
   - "I look forward to spending _Thanksgiving_ at home"
+ - prevent closing window?
+ - enter ID at the beginning to match demographics?
 
 How to make changes
 ---

@@ -52,6 +52,9 @@ ul {
 .yellow {
   color: #ffff00;
 }
+.red {
+  color: red;
+}
 .fixed-position-below {
   position: absolute;
   width: 30em;
@@ -101,6 +104,12 @@ ul {
 }
 .cards .right {
   float: right;
+}
+.reward {
+  width: 80px;
+  height: 80px;
+  width: 7vw;
+  height: 7vw;
 }
 .likert {
   display: table;

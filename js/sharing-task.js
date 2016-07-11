@@ -1,9 +1,26 @@
 $(document).ready(function() {
+    // FIREBASE
+    var config = {
+        apiKey: "AIzaSyBeixOTp2AjaOlWaIFI0O4Ew0CMVNhKPlo",
+        authDomain: "sharing-task.firebaseapp.com",
+        databaseURL: "https://sharing-task.firebaseio.com",
+        storageBucket: "",
+    };
+    firebase.initializeApp(config);
+    //   Anonymous Authentication
+    var userId;
+    firebase.auth().signInAnonymously().then(function(user) {
+        userId = user.uid;
+        console.log('Signed in as ' + userId);
+    });
+
     // RANDOMIZATION
     shuffle_array(statements);
     shuffle_array(statements_train);
 
     // TRIALS
+    // Note: only data from trials of 'single-stim' type are recorded
+    //       (change this in function startExperiment -> on_data_update)
     var syncingScreen = {
         type: 'multi-stim-multi-response',
         is_html: true,
@@ -43,14 +60,7 @@ $(document).ready(function() {
         choices: [],
         timing_response: NUMBER_TIME,
         response_ends_trial: false,
-        on_finish: function(data) {
-            var strBeforeNum = '"very-large center-content">';
-            var number = parseInt(data.stimulus[data.stimulus.indexOf(strBeforeNum) + strBeforeNum.length]);
-            jsPsych.data.addDataToLastTrial({
-                type: 'number',
-                number: number
-            });
-        }
+        on_finish: function(data) { processNumberTrialData(data, userId); }
     };
 
     var privateShareScreen = {  // dummy
@@ -60,57 +70,7 @@ $(document).ready(function() {
         choices: ['1', '5'],
         timing_response: PRIVATE_SHARE_TIME,
         response_ends_trial: true,
-        on_finish: function(data) {
-            var trialType = (data.stimulus.indexOf('>SELF<') === -1) ? 'number-choice' : 'self-choice';
-
-            // get values
-            var left, right, privateVal, shareVal, earnedVal;
-            var firstVal = parseInt(data.stimulus[data.stimulus.indexOf('penny') + 5]),
-                secondVal = parseInt(data.stimulus[data.stimulus.lastIndexOf('penny') + 5]);
-            var shareIsFirst = data.stimulus.indexOf('SHARE') < data.stimulus.indexOf('PRIVATE'),
-                leftIsFirst = data.stimulus.indexOf('left-side') < data.stimulus.indexOf('right-side');
-            if ((shareIsFirst && leftIsFirst) || (!shareIsFirst && !leftIsFirst)) {
-                // 'share' is on the left side
-                left = 'share';
-                right = 'private';
-            } else {
-                // 'private' is on the left side
-                left = 'private';
-                right = 'share';
-            }
-            if (shareIsFirst) {
-                shareVal = firstVal;
-                privateVal = secondVal;
-            } else {
-                privateVal = firstVal;
-                shareVal = secondVal;
-            }
-
-            // get response and earning
-            var response;
-            switch (data.key_press) {
-            case 49:
-                response = left;
-                earnedVal = (response === 'share') ? shareVal : privateVal;
-                break;
-            case 53:
-                response = right;
-                earnedVal = (response === 'share') ? shareVal : privateVal;
-                break;
-            default:
-                response = null;
-                earnedVal = 0;
-                break;
-            }
-
-            jsPsych.data.addDataToLastTrial({
-                type: trialType,
-                response: response,
-                private_value: privateVal,
-                share_value: shareVal,
-                earned_value: earnedVal
-            });
-        }
+        on_finish: function (data) { processPrivateShareData(data, userId); }
     };
 
     var privateShareNoAnswer = {
@@ -144,28 +104,7 @@ $(document).ready(function() {
         choices: ['1', '2', '3', '4', '5'],
         timing_response: LIKERT_CHOICE_TIME,
         response_ends_trial: true,
-        on_finish: function(data) {
-            var strBeforeStatement = '<p class="fixed-position-mid">',
-                strAfterStatement = '</p><div class="likert">';
-            var statementStartIdx = data.stimulus.indexOf(strBeforeStatement) + strBeforeStatement.length,
-                statementEndIdx = data.stimulus.indexOf(strAfterStatement);
-            var statement = data.stimulus.substring(statementStartIdx, statementEndIdx);
-
-            var response;
-            switch (data.key_press) {
-                case 49: response = 1; break;
-                case 50: response = 2; break;
-                case 51: response = 3; break;
-                case 52: response = 4; break;
-                case 53: response = 5; break;
-                default: response = null; break;
-            }
-            jsPsych.data.addDataToLastTrial({
-                type: 'self',
-                statement: statement,
-                number: response,
-            });
-        }
+        on_finish: function(data) { processSelfTrialData(data, userId); }
     }
 
     var likertNoAnswer = {
@@ -193,21 +132,21 @@ $(document).ready(function() {
     }
 
 
-    // add numTrialsPerType self trials and numTrialsPerType number trials in random order
+    // add <numTrialsPerType> self trials and <numTrialsPerType number> trials in random order
     function addTrialsRandomly(numTrialsPerType, isTraining) {
         for (var i = 0, j = 0; i < numTrialsPerType || j < numTrialsPerType;) {
             var randInt = random_int(1, 2);
             if (i < numTrialsPerType && (randInt === 1 || j === numTrialsPerType)) {
                 allTimeline.push(
                     newNumberTrial(numberScreen),
-                    newPrivateShareLoop(privateShareLoop, true)
+                    newPrivateShareLoop(privateShareLoop, true, isTraining)
                 );
                 ++i;
             }
             if (j < numTrialsPerType && (randInt === 2 || i === numTrialsPerType)) {
                 allTimeline.push(
                     newLikertLoop(likertLoop, isTraining),
-                    newPrivateShareLoop(privateShareLoop, false)
+                    newPrivateShareLoop(privateShareLoop, false, isTraining)
                 );
                 ++j;
             }
@@ -215,7 +154,7 @@ $(document).ready(function() {
     }
 
 
-    // EXPERIMENT START
+    // EXPERIMENT TIMELINE
     var allTimeline = [];
     //   Instructions
     for (var i in beginningInstructions) {
@@ -249,46 +188,10 @@ $(document).ready(function() {
         // Start the experiment
         jsPsych.init({
             display_element: $('#jspsych-target'),
-            timeline: allTimeline,
-            on_finish: function() {
-                // A helper function creating an associative array
-                function getInitialDistribution() {
-                    var dist = {};
-                    for (var i = -3; i < 4; ++i) {
-                        dist[i] = [0, 0];   // when (value_of_share - value_of_private === i): [num_of_shared_trials, total_num_of_-3_trials]
-                    }
-                    return dist;
-                }
-
-                var data = jsPsych.data.getData();
-                // Process data
-                var totalEarning = 0,
-                    numChoiceDistribution = getInitialDistribution(),
-                    selfChoiceDistribution = getInitialDistribution();
-
-                for (var i in data) {
-                    var trialData = data[i];
-                    if (!trialData.type || !trialData.response) {
-                        continue;
-                    }
-                    if (trialData.type === 'self-choice' || trialData.type === 'number-choice') {
-                        totalEarning += trialData.earned_value;
-
-                        var relativeValue = trialData.share_value - trialData.private_value;
-                        var dist = (trialData.type === 'self-choice') ? selfChoiceDistribution : numChoiceDistribution;
-                        var relValArray = dist[relativeValue];
-                        ++relValArray[1];
-                        if (trialData.response === 'share') {
-                            ++relValArray[0];
-                        }
-                    }
-                }
-                console.log([totalEarning, selfChoiceDistribution, numChoiceDistribution]);
-                // Save data
-            }
+            timeline: allTimeline
         });
     }
 
     // Load images and then call startExperiment()
-    jsPsych.pluginAPI.preloadImages(PENNIES, startExperiment);
+    jsPsych.pluginAPI.preloadImages(REWARDS, startExperiment);
 });
