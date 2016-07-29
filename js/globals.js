@@ -252,8 +252,7 @@ function processNumberTrialData(data, firebaseUid) {
         stimulus: data.stimulus,
         rt: data.rt,
         number: number
-    }, firebaseUid
-);
+    }, firebaseUid);
 }
 
 function processSelfTrialData(data, firebaseUid) {
@@ -287,8 +286,7 @@ function sendToDatabase(data, firebaseUid) {
     // Firebase
     console.log(["uid", firebaseUid]);
     var newDataKey = firebase.database().ref().child(firebaseUid).push().key;
-    var path = '/' + firebaseUid
- + '/' + newDataKey + '/';
+    var path = '/' + firebaseUid + '/' + newDataKey + '/';
     firebase.database().ref(path).set(data);
 }
 

@@ -210,7 +210,7 @@ $(document).ready(function() {
     // EXPERIMENT TIMELINE
     //   Instructions
     for (var i in beginningInstructions) {
-        // allTimeline.push(beginningInstructions[i]);
+        allTimeline.push(beginningInstructions[i]);
     }
 
     //   Training trials
