@@ -49,19 +49,26 @@ var PRIVATE_SHARE_EXAMPLE_INSTR_3 = 'You should make your choice by pressing 1 f
                     ' for the right option (PRIVATE). You will have ' + PRIVATE_SHARE_TIME/1000 + ' seconds to make your choice. ' +
                     'This screen will stay up for the entire ' + PRIVATE_SHARE_TIME/1000 + ' seconds.';
 
-var EARNING_INSTR = 'It is important to remember that we will actually pay you these amounts at the end of the experiment; ' +
-                'based on your choices, you will earn money in addition to the credit you are already earning for your participation.';
+var EARNING_INSTR = 'It is important to remember that you will actually earn these amounts of credits at the end of the experiment; ' +
+                'based on your choices, you will earn extra credits in addition to the credit you are already earning for your participation.';
 
 var RECEIVER_INSTR = 'Critically, you will be generating information for your study partner in this experiment. ' +
-                'This other participant is sitting in the room adjacent to yours NEED TO CHANGE THIS. ' +
-                'When you choose to share the SELF or NUMBER information, it will be displayed to your partner in the other room.';
+                'We have established communication over the Internet between your computer and your partner\'s. ' +
+                'When you choose to share the SELF or NUMBER information, it will be displayed to your partner.';
 
 var TRAINING_START_INSTR = 'Let\'s try a few to get a feel for the task.';
 
-var TRAINING_END_INSTR = 'Please find the experimenter now to ask any questions about the task.<br/><br/>' +
-            'If you understand these instructions, please find the experimenter to BEGIN';
+var TRAINING_END_INSTR = 'If you have any questions about the task, please contact the experimenter.<br/><br/>' +
+            'If you understand these instructions, please press "=" to BEGIN';
 
-var EXPERIMENT_END_INSTR = 'Thank you for participanting!';
+var EXPERIMENT_END_INSTR
+ = 'Thank you for participating!';
+
+var RESULTS_INSTR_1 = 'You earned ';
+var RESULTS_INSTR_2 = ' out of ';
+var RESULTS_INSTR_3 = ' possible stars.';
+
+var CLOSE_WINDOW_ALERT = "Do you want to leave this page? Your progress will not be saved.";
 
 
 // Add HTML
@@ -82,7 +89,11 @@ EARNING_INSTR = '<p>' + EARNING_INSTR + '</p>';
 RECEIVER_INSTR = '<p>' + RECEIVER_INSTR + '</p>';
 TRAINING_START_INSTR = '<p>' + TRAINING_START_INSTR + '</p>';
 TRAINING_END_INSTR = '<p>' + TRAINING_END_INSTR + '</p>';
-EXPERIMENT_END_INSTR = '<p>' + EXPERIMENT_END_INSTR + '</p>';
+EXPERIMENT_END_INSTR
+ = '<p class="fixed-position-mid">' + EXPERIMENT_END_INSTR
+ + '</p>';
+RESULTS_INSTR_1 = '<p class="fixed-position-mid-below">' + RESULTS_INSTR_1;
+RESULTS_INSTR_3 = RESULTS_INSTR_3 + '</p>';
 INFO_SENT_INSTR = '<p class="fixed-position-below small ' + INFO_SENT_COLOR + '">' + INFO_SENT + '</p>';
 
 
@@ -144,6 +155,15 @@ var middleInstruction = {   // This appears after training
 }
 
 var endInstruction = {
-    type: 'instructions',
-    pages: [EXPERIMENT_END_INSTR],
+    type: 'multi-stim-multi-response',
+    is_html: true,
+    stimuli: [EXPERIMENT_END_INSTR],
+    prompt: function() {
+        hookWindow = false;
+        return RESULTS_INSTR_1 + results.totalEarning + RESULTS_INSTR_2 + results.highestPossibleEarning + RESULTS_INSTR_3;
+    },
+    choices: [],
+    timing_stim: RESULTS_TIME,
+    response_ends_trial: false,
+    // on_finish: function() {}
 }

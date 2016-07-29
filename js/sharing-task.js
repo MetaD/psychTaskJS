@@ -1,4 +1,64 @@
+/*
+ * Author: Meng Du
+ * Date: July 12, 2016
+ */
+
+
+var allTimeline = [];
+var firebaseUid, userId;
+
+
+function startExperiment() {
+    hookWindow = true;
+    // Start the experiment
+    jsPsych.init({
+        display_element: $('#jspsych-target'),
+        timeline: allTimeline
+    });
+}
+
+function valid_id(uid) {
+    if (uid === 'test' || uid.length === ID_LENGTH) {
+        return true;
+    }
+    return false;
+}
+
+function id_submission() {
+    userId = $("#uid-input").val();
+    if (valid_id(userId)) {
+        $("#id-dialog").modal('hide');
+
+        // Firebase Anonymous Authentication
+        firebase.auth().signInAnonymously().then(function(user) {
+            firebaseUid = user.uid;
+            console.log('Signed in as ' + firebaseUid);
+
+            // save participant id to firebase user
+            firebase.database().ref('/' + firebaseUid).set({
+                id: userId
+            });
+        });
+
+        // Load images and then start experiment
+        jsPsych.pluginAPI.preloadImages(REWARDS, startExperiment);
+    }
+    else {
+        $("#uid-field").addClass("has-error");
+    }
+}
+
+
 $(document).ready(function() {
+    $("#id-dialog").modal('show');
+
+    // PREVENT CLOSING WINDOW
+    window.onbeforeunload = function() {
+        if (hookWindow) {
+            return CLOSE_WINDOW_ALERT;
+        }
+    }
+
     // FIREBASE
     var config = {
         apiKey: "AIzaSyBeixOTp2AjaOlWaIFI0O4Ew0CMVNhKPlo",
@@ -7,20 +67,13 @@ $(document).ready(function() {
         storageBucket: "",
     };
     firebase.initializeApp(config);
-    //   Anonymous Authentication
-    var userId;
-    firebase.auth().signInAnonymously().then(function(user) {
-        userId = user.uid;
-        console.log('Signed in as ' + userId);
-    });
 
     // RANDOMIZATION
     shuffle_array(statements);
     shuffle_array(statements_train);
 
     // TRIALS
-    // Note: only data from trials of 'single-stim' type are recorded
-    //       (change this in function startExperiment -> on_data_update)
+    // Note: only data from trials with on_finish function are recorded
     var syncingScreen = {
         type: 'multi-stim-multi-response',
         is_html: true,
@@ -60,7 +113,7 @@ $(document).ready(function() {
         choices: [],
         timing_response: NUMBER_TIME,
         response_ends_trial: false,
-        on_finish: function(data) { processNumberTrialData(data, userId); }
+        on_finish: function(data) { console.log(firebaseUid); processNumberTrialData(data, firebaseUid); }
     };
 
     var privateShareScreen = {  // dummy
@@ -70,7 +123,7 @@ $(document).ready(function() {
         choices: ['1', '5'],
         timing_response: PRIVATE_SHARE_TIME,
         response_ends_trial: true,
-        on_finish: function (data) { processPrivateShareData(data, userId); }
+        on_finish: function (data) { console.log(firebaseUid); processPrivateShareData(data, firebaseUid); }
     };
 
     var privateShareNoAnswer = {
@@ -104,7 +157,7 @@ $(document).ready(function() {
         choices: ['1', '2', '3', '4', '5'],
         timing_response: LIKERT_CHOICE_TIME,
         response_ends_trial: true,
-        on_finish: function(data) { processSelfTrialData(data, userId); }
+        on_finish: function(data) { processSelfTrialData(data, firebaseUid); }
     }
 
     var likertNoAnswer = {
@@ -155,10 +208,9 @@ $(document).ready(function() {
 
 
     // EXPERIMENT TIMELINE
-    var allTimeline = [];
     //   Instructions
     for (var i in beginningInstructions) {
-        allTimeline.push(beginningInstructions[i]);
+        // allTimeline.push(beginningInstructions[i]);
     }
 
     //   Training trials
@@ -181,17 +233,4 @@ $(document).ready(function() {
 
     //   Ending
     allTimeline.push(endInstruction);
-
-
-    // START
-    function startExperiment() {
-        // Start the experiment
-        jsPsych.init({
-            display_element: $('#jspsych-target'),
-            timeline: allTimeline
-        });
-    }
-
-    // Load images and then call startExperiment()
-    jsPsych.pluginAPI.preloadImages(REWARDS, startExperiment);
 });

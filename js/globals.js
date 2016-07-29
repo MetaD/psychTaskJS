@@ -1,3 +1,8 @@
+/*
+ * Author: Meng Du
+ * Date: July 12, 2016
+ */
+
 // CONSTANTS
 //   Experimental settings
 var NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related to Likert must also change
@@ -5,19 +10,22 @@ var NUM_LIKERT_CHOICES = 5,  // if this is changed, .css and everything related 
     NUM_TRIALS_PER_TYPE_PER_BLOCK = 1;   // there are two blocks separated by a break
 
 //   Times (in ms)
-var FIND_PARTNER_TIME = random_int(300, 700),
-    ASSIGNING_ROLE_TIME = random_int(100, 1000),
+var FIND_PARTNER_TIME = random_int(3000, 5000),
+    ASSIGNING_ROLE_TIME = random_int(1000, 2000),
     PRIVATE_SHARE_TIME = 2500,
     LIKERT_CHOICE_TIME = 4000,
-    NUMBER_TIME = 400,      // Time for showing the random number
-    SYNC_TIME = random_int(200, 500),
-    GET_READY_TIME = 200,
-    NO_ANSWER_SCREEN_TIME = 200,
-    BREAK_TIME = 1000;
+    NUMBER_TIME = 1000,      // Time for showing the random number
+    SYNC_TIME = random_int(1000, 2000),
+    GET_READY_TIME = 1000,
+    NO_ANSWER_SCREEN_TIME = 1000,
+    BREAK_TIME = 4000,
+    RESULTS_TIME = 1000000;  // Time to show final results
+
+//   Valid ID length
+var ID_LENGTH = 5;
 
 //   Pictures
-var REWARDS
- = ['img/star1.png', 'img/star2.png', 'img/star3.png', 'img/star4.png'];
+var REWARDS = ['img/star1.png', 'img/star2.png', 'img/star3.png', 'img/star4.png'];
 var IMG_NAME_BEFORE_VALUE = 'star';    // Make sure in the image file name, the number appearing after this string indicates the image value
 
 //   Colors
@@ -174,7 +182,7 @@ function newNumberTrial(trial) {
 
 
 // Data processors
-function processPrivateShareData(data, userId) {
+function processPrivateShareData(data, firebaseUid) {
     var trialType = (data.stimulus.indexOf(SELF) === -1) ? 'number-choice' : 'self-choice';
 
     // get values
@@ -217,9 +225,11 @@ function processPrivateShareData(data, userId) {
         break;
     }
 
-    // Update results for participants
-    results.totalEarning += data.earned_value;
-    results.highestPossibleEarning += data.share_value > data.private_value ? data.share_value : data.private_value;
+    // Update results for participants (if not training)
+    if (data.stimulus.indexOf("is-training") === -1) {
+        results.totalEarning += earnedVal;
+        results.highestPossibleEarning += shareVal > privateVal ? shareVal : privateVal;
+    }
 
     sendToDatabase({
         type: trialType,
@@ -230,11 +240,10 @@ function processPrivateShareData(data, userId) {
         private_value: privateVal,
         share_value: shareVal,
         earned_value: earnedVal
-    }, userId);
+    }, firebaseUid);
 }
 
-function processNumberTrialData(data, userId) {
-    console.log(data);
+function processNumberTrialData(data, firebaseUid) {
     var strBeforeNum = '<p class="very-large center-content">';
     var number = parseInt(data.stimulus[data.stimulus.indexOf(strBeforeNum) + strBeforeNum.length]);
     sendToDatabase({
@@ -243,10 +252,11 @@ function processNumberTrialData(data, userId) {
         stimulus: data.stimulus,
         rt: data.rt,
         number: number
-    }, userId);
+    }, firebaseUid
+);
 }
 
-function processSelfTrialData(data, userId) {
+function processSelfTrialData(data, firebaseUid) {
     var strBeforeStatement = '<p class="fixed-position-mid">',
         strAfterStatement = '</p><div class="likert">';
     var statementStartIdx = data.stimulus.indexOf(strBeforeStatement) + strBeforeStatement.length,
@@ -270,16 +280,21 @@ function processSelfTrialData(data, userId) {
         rt: data.rt,
         statement: statement,
         number: response
-    }, userId);
+    }, firebaseUid);
 }
 
-function sendToDatabase(data, userId) {
+function sendToDatabase(data, firebaseUid) {
     // Firebase
-    var newDataKey = firebase.database().ref().child(userId).push().key;
-    var path = '/' + userId + '/' + newDataKey + '/';
+    console.log(["uid", firebaseUid]);
+    var newDataKey = firebase.database().ref().child(firebaseUid).push().key;
+    var path = '/' + firebaseUid
+ + '/' + newDataKey + '/';
     firebase.database().ref(path).set(data);
 }
 
 // Indexes
 var statementIndex = 0,
     trainStmtIndex = 0;
+
+// Prevent closing window
+var hookWindow = false;
