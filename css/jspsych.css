@@ -132,6 +132,7 @@ ul {
 .reward {
   width: 80px;
   height: 80px;
+  margin-top: -1vw;
   width: 7vw;
   height: 7vw;
 }

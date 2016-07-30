@@ -61,12 +61,14 @@ var TRAINING_START_INSTR = 'Let\'s try a few to get a feel for the task.';
 var TRAINING_END_INSTR = 'If you have any questions about the task, please contact the experimenter.<br/><br/>' +
             'If you understand these instructions, please press "=" to BEGIN';
 
-var EXPERIMENT_END_INSTR
- = 'Thank you for participating!';
+var EXPERIMENT_END_INSTR = 'Thank you for participating!';
 
-var RESULTS_INSTR_1 = 'You earned ';
-var RESULTS_INSTR_2 = ' out of ';
-var RESULTS_INSTR_3 = ' possible stars.';
+var RESULTS_INSTR_1 = 'You shared a number for ';
+var RESULTS_INSTR_2 = 'You shared information about yourself for ';
+var RESULTS_INSTR_3 = 'And you earned ';
+var RESULTS_INSTR_4 = ' possible stars!';
+var RESULTS_INSTR_OUT_OF = ' out of ';
+var RESULTS_INSTR_TIMES = ' times.';
 
 var CLOSE_WINDOW_ALERT = "Do you want to leave this page? Your progress will not be saved.";
 
@@ -89,11 +91,10 @@ EARNING_INSTR = '<p>' + EARNING_INSTR + '</p>';
 RECEIVER_INSTR = '<p>' + RECEIVER_INSTR + '</p>';
 TRAINING_START_INSTR = '<p>' + TRAINING_START_INSTR + '</p>';
 TRAINING_END_INSTR = '<p>' + TRAINING_END_INSTR + '</p>';
-EXPERIMENT_END_INSTR
- = '<p class="fixed-position-mid">' + EXPERIMENT_END_INSTR
- + '</p>';
-RESULTS_INSTR_1 = '<p class="fixed-position-mid-below">' + RESULTS_INSTR_1;
-RESULTS_INSTR_3 = RESULTS_INSTR_3 + '</p>';
+EXPERIMENT_END_INSTR = '<p class="fixed-position-mid">' + EXPERIMENT_END_INSTR + '</p>';
+RESULTS_INSTR_1 = '<div class="fixed-position-mid-below"><p>' + RESULTS_INSTR_1;
+RESULTS_INSTR_TIMES = RESULTS_INSTR_TIMES + '<br/>';
+RESULTS_INSTR_4 = RESULTS_INSTR_4 + '</p></div>'
 INFO_SENT_INSTR = '<p class="fixed-position-below small ' + INFO_SENT_COLOR + '">' + INFO_SENT + '</p>';
 
 
@@ -160,7 +161,10 @@ var endInstruction = {
     stimuli: [EXPERIMENT_END_INSTR],
     prompt: function() {
         hookWindow = false;
-        return RESULTS_INSTR_1 + results.totalEarning + RESULTS_INSTR_2 + results.highestPossibleEarning + RESULTS_INSTR_3;
+        var numTrialsPerType = NUM_TRIALS_PER_TYPE_PER_BLOCK * 2;
+        return RESULTS_INSTR_1 + results.sharedNumberTrials + RESULTS_INSTR_OUT_OF + numTrialsPerType + RESULTS_INSTR_TIMES +
+               RESULTS_INSTR_2 + results.sharedSelfTrials + RESULTS_INSTR_OUT_OF + numTrialsPerType + RESULTS_INSTR_TIMES +
+               RESULTS_INSTR_3 + results.totalEarning + RESULTS_INSTR_OUT_OF + results.highestPossibleEarning + RESULTS_INSTR_4;
     },
     choices: [],
     timing_stim: RESULTS_TIME,

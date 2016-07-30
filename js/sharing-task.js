@@ -113,7 +113,7 @@ $(document).ready(function() {
         choices: [],
         timing_response: NUMBER_TIME,
         response_ends_trial: false,
-        on_finish: function(data) { console.log(firebaseUid); processNumberTrialData(data, firebaseUid); }
+        on_finish: function(data) { processNumberTrialData(data, firebaseUid); }
     };
 
     var privateShareScreen = {  // dummy
@@ -123,7 +123,7 @@ $(document).ready(function() {
         choices: ['1', '5'],
         timing_response: PRIVATE_SHARE_TIME,
         response_ends_trial: true,
-        on_finish: function (data) { console.log(firebaseUid); processPrivateShareData(data, firebaseUid); }
+        on_finish: function (data) { processPrivateShareData(data, firebaseUid); }
     };
 
     var privateShareNoAnswer = {

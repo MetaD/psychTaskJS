@@ -61,7 +61,9 @@ SELF = '<p class="large fixed-position-above ' + TITLE_COLOR + '">' + SELF + '</
 // RESULTS (shown to participants at the end)
 var results = {
     totalEarning: 0,
-    highestPossibleEarning: 0
+    highestPossibleEarning: 0,
+    sharedNumberTrials: 0,
+    sharedSelfTrials: 0
 };
 
 
@@ -229,6 +231,13 @@ function processPrivateShareData(data, firebaseUid) {
     if (data.stimulus.indexOf("is-training") === -1) {
         results.totalEarning += earnedVal;
         results.highestPossibleEarning += shareVal > privateVal ? shareVal : privateVal;
+        if (response === SHARE) {
+            if (trialType === 'number-choice') {
+                ++results.sharedNumberTrials;
+            } else {
+                ++results.sharedSelfTrials;
+            }
+        }
     }
 
     sendToDatabase({
@@ -284,7 +293,6 @@ function processSelfTrialData(data, firebaseUid) {
 
 function sendToDatabase(data, firebaseUid) {
     // Firebase
-    console.log(["uid", firebaseUid]);
     var newDataKey = firebase.database().ref().child(firebaseUid).push().key;
     var path = '/' + firebaseUid + '/' + newDataKey + '/';
     firebase.database().ref(path).set(data);
