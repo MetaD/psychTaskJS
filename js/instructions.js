@@ -160,7 +160,13 @@ var endInstruction = {
     is_html: true,
     stimuli: [EXPERIMENT_END_INSTR],
     prompt: function() {
-        hookWindow = false;
+        hookWindow = false;  // no alert for closing the window now
+
+        // send end time to fire base
+        var endTimeUpdate = {};
+        endTimeUpdate['/' + firebaseUid + '/end_time'] = (new Date()).toUTCString();
+        firebase.database().ref().update(endTimeUpdate);
+
         var numTrialsPerType = NUM_TRIALS_PER_TYPE_PER_BLOCK * 2;
         return RESULTS_INSTR_1 + results.sharedNumberTrials + RESULTS_INSTR_OUT_OF + numTrialsPerType + RESULTS_INSTR_TIMES +
                RESULTS_INSTR_2 + results.sharedSelfTrials + RESULTS_INSTR_OUT_OF + numTrialsPerType + RESULTS_INSTR_TIMES +

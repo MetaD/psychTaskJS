@@ -36,7 +36,8 @@ function id_submission() {
 
             // save participant id to firebase user
             firebase.database().ref('/' + firebaseUid).set({
-                id: userId
+                id: userId,
+                start_time: (new Date()).toUTCString()
             });
         });
 
