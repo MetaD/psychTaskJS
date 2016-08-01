@@ -165,6 +165,9 @@ function newLikertTrial (trial, isTraining) {
     copy['stimulus'] = SELF;
     copy['stimulus'] += '<p class="fixed-position-mid">' + (isTraining ? statements_train[trainStmtIndex++] : statements[statementIndex++]) + '</p>';
     copy['stimulus'] += LIKERT_DIV;
+    if (isTraining) {
+        copy['stimulus'] += '<div id="is-training"></div>';  // dummy div marking this trial as training
+    }
     return copy;
 }
 
@@ -174,11 +177,14 @@ function newLikertLoop(loop, isTraining) {
     return copy;
 }
 
-function newNumberTrial(trial) {
+function newNumberTrial(trial, isTraining) {
     var copy = jQuery.extend(true, {}, trial);
     // new stimulus
     copy['stimulus'] = NUMBER + '<p>The number for this trial is</p>';
     copy['stimulus'] += '<p class="very-large center-content">' + random_int(1, 5).toString() + '</p>';
+    if (isTraining) {
+        copy['stimulus'] += '<div id="is-training"></div>';  // dummy div marking this trial as training
+    }
     return copy;
 }
 
@@ -228,7 +234,8 @@ function processPrivateShareData(data, firebaseUid) {
     }
 
     // Update results for participants (if not training)
-    if (data.stimulus.indexOf("is-training") === -1) {
+    var isTraining = (data.stimulus.indexOf("is-training") !== -1);
+    if (!isTraining) {
         results.totalEarning += earnedVal;
         results.highestPossibleEarning += shareVal > privateVal ? shareVal : privateVal;
         if (response === SHARE) {
@@ -248,19 +255,22 @@ function processPrivateShareData(data, firebaseUid) {
         response: response,
         private_value: privateVal,
         share_value: shareVal,
-        earned_value: earnedVal
+        earned_value: earnedVal,
+        isTraining: isTraining
     }, firebaseUid);
 }
 
 function processNumberTrialData(data, firebaseUid) {
     var strBeforeNum = '<p class="very-large center-content">';
     var number = parseInt(data.stimulus[data.stimulus.indexOf(strBeforeNum) + strBeforeNum.length]);
+    var isTraining = (data.stimulus.indexOf("is-training") !== -1);
     sendToDatabase({
         type: 'number',
         trial_index: data.trial_index,
         stimulus: data.stimulus,
         rt: data.rt,
-        number: number
+        number: number,
+        isTraining: isTraining
     }, firebaseUid);
 }
 
@@ -280,14 +290,16 @@ function processSelfTrialData(data, firebaseUid) {
         case 53: response = 5; break;
         default: response = null; break;
     }
-    
+
+    var isTraining = (data.stimulus.indexOf("is-training") !== -1);
     sendToDatabase({
         type: 'self',
         trial_index: data.trial_index,
         stimulus: data.stimulus,
         rt: data.rt,
         statement: statement,
-        number: response
+        number: response,
+        isTraining: isTraining
     }, firebaseUid);
 }
 

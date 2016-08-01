@@ -174,6 +174,5 @@ var endInstruction = {
     },
     choices: [],
     timing_stim: RESULTS_TIME,
-    response_ends_trial: false,
-    // on_finish: function() {}
+    response_ends_trial: false
 }

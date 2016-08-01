@@ -192,7 +192,7 @@ $(document).ready(function() {
             var randInt = random_int(1, 2);
             if (i < numTrialsPerType && (randInt === 1 || j === numTrialsPerType)) {
                 allTimeline.push(
-                    newNumberTrial(numberScreen),
+                    newNumberTrial(numberScreen, isTraining),
                     newPrivateShareLoop(privateShareLoop, true, isTraining)
                 );
                 ++i;
