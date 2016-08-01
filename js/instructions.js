@@ -160,12 +160,17 @@ var endInstruction = {
     is_html: true,
     stimuli: [EXPERIMENT_END_INSTR],
     prompt: function() {
-        hookWindow = false;  // no alert for closing the window now
-
-        // send end time to fire base
+        // send end time to firebase
         var endTimeUpdate = {};
         endTimeUpdate['/' + firebaseUid + '/end_time'] = (new Date()).toUTCString();
         firebase.database().ref().update(endTimeUpdate);
+
+        // sign out anonymous user
+        firebase.auth().signOut().then(function() {
+            hookWindow = false;  // no alert for closing the window now
+        }, function(error) {
+            console.log(error);
+        });
 
         var numTrialsPerType = NUM_TRIALS_PER_TYPE_PER_BLOCK * 2;
         return RESULTS_INSTR_1 + results.sharedNumberTrials + RESULTS_INSTR_OUT_OF + numTrialsPerType + RESULTS_INSTR_TIMES +
