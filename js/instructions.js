@@ -163,13 +163,13 @@ var endInstruction = {
         // send end time to firebase
         var endTimeUpdate = {};
         endTimeUpdate['/' + firebaseUid + '/end_time'] = (new Date()).toUTCString();
-        firebase.database().ref().update(endTimeUpdate);
-
-        // sign out anonymous user
-        firebase.auth().signOut().then(function() {
-            hookWindow = false;  // no alert for closing the window now
-        }, function(error) {
-            console.log(error);
+        firebase.database().ref().update(endTimeUpdate).then(function() {
+            // sign out anonymous user
+            firebase.auth().signOut().then(function() {
+                hookWindow = false;  // no alert for closing the window now
+            }, function(error) {
+                console.log(error);
+            });
         });
 
         var numTrialsPerType = NUM_TRIALS_PER_TYPE_PER_BLOCK * 2;
