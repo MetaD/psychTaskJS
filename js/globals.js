@@ -256,7 +256,7 @@ function processPrivateShareData(data, firebaseUid) {
         private_value: privateVal,
         share_value: shareVal,
         earned_value: earnedVal,
-        isTraining: isTraining
+        is_training: isTraining
     }, firebaseUid);
 }
 
@@ -270,7 +270,7 @@ function processNumberTrialData(data, firebaseUid) {
         stimulus: data.stimulus,
         rt: data.rt,
         number: number,
-        isTraining: isTraining
+        is_training: isTraining
     }, firebaseUid);
 }
 
@@ -299,7 +299,7 @@ function processSelfTrialData(data, firebaseUid) {
         rt: data.rt,
         statement: statement,
         number: response,
-        isTraining: isTraining
+        is_training: isTraining
     }, firebaseUid);
 }
 
