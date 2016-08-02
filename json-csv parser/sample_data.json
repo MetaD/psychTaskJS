@@ -1,0 +1,426 @@
+{
+  "W8tXc6ur5OWZKLmdZ9OMkX3JdeG3" : {
+    "-KO8NopbdBXAhnjsv6Ld" : {
+      "is_training" : true,
+      "number" : 3,
+      "rt" : 833,
+      "statement" : "I believe a full moon can cause strange behavior",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I believe a full moon can cause strange behavior</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 5,
+      "type" : "self"
+    },
+    "-KO8NpP4jevIU9IfItem" : {
+      "earned_value" : 4,
+      "is_training" : true,
+      "private_value" : 3,
+      "response" : "SHARE",
+      "rt" : 827,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"yellow center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"right-side\"class=\"blue center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 6,
+      "type" : "self-choice"
+    },
+    "-KO8NpdkEiWahETaJlRB" : {
+      "is_training" : true,
+      "number" : 4,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">4</p><div id=\"is-training\"></div>",
+      "trial_index" : 7,
+      "type" : "number"
+    },
+    "-KO8NqE9Q2QVW-8DbwjP" : {
+      "earned_value" : 3,
+      "is_training" : true,
+      "private_value" : 3,
+      "response" : "PRIVATE",
+      "rt" : 888,
+      "share_value" : 3,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"left-side\" class=\"yellow center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"right-side\"class=\"blue center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star3.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 8,
+      "type" : "number-choice"
+    },
+    "-KO8Nrdx7hZ7-k9oQkVL" : {
+      "is_training" : false,
+      "number" : 1,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">1</p>",
+      "trial_index" : 11,
+      "type" : "number"
+    },
+    "-KO8NsG4FtZvsaocB0NE" : {
+      "earned_value" : 0,
+      "is_training" : false,
+      "private_value" : 2,
+      "rt" : -1,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"yellow center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"blue center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 12,
+      "type" : "number-choice"
+    },
+    "-KO8Nt6rVlgVccz3EXf4" : {
+      "earned_value" : 0,
+      "is_training" : false,
+      "private_value" : 2,
+      "rt" : -1,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"yellow center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"blue center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 14,
+      "type" : "number-choice"
+    },
+    "-KO8NtycLYJE-OyUhGyW" : {
+      "earned_value" : 0,
+      "is_training" : false,
+      "private_value" : 2,
+      "rt" : -1,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"yellow center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"blue center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 16,
+      "type" : "number-choice"
+    },
+    "-KO8Nufj_Kl_WJnC3kC3" : {
+      "earned_value" : 2,
+      "is_training" : false,
+      "private_value" : 2,
+      "response" : "PRIVATE",
+      "rt" : 381,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"yellow center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"blue center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 18,
+      "type" : "number-choice"
+    },
+    "-KO8NvDhtdofDYmxmA_n" : {
+      "is_training" : false,
+      "number" : 1,
+      "rt" : 734,
+      "statement" : "I like to bike to work",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I like to bike to work</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 19,
+      "type" : "self"
+    },
+    "-KO8NvuTSMJ3DuH2Ocao" : {
+      "earned_value" : 3,
+      "is_training" : false,
+      "private_value" : 3,
+      "response" : "SHARE",
+      "rt" : 1297,
+      "share_value" : 3,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"yellow center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"right-side\"class=\"blue center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star3.png\"></div></div>",
+      "trial_index" : 20,
+      "type" : "self-choice"
+    },
+    "-KO8Nxek9Aowuhhl5AvT" : {
+      "is_training" : false,
+      "number" : 2,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">2</p>",
+      "trial_index" : 23,
+      "type" : "number"
+    },
+    "-KO8Ny94Nbm_oOiHjRhS" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 4,
+      "response" : "PRIVATE",
+      "rt" : 502,
+      "share_value" : 1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"left-side\" class=\"yellow center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star4.png\"></div><div id=\"right-side\"class=\"blue center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star1.png\"></div></div>",
+      "trial_index" : 24,
+      "type" : "number-choice"
+    },
+    "-KO8Nyfy-MsIvDfL3bP8" : {
+      "is_training" : false,
+      "number" : 2,
+      "rt" : 664,
+      "statement" : "I love watching snow fall",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I love watching snow fall</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 25,
+      "type" : "self"
+    },
+    "-KO8NzNRzb8BSH-WgmFB" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 2,
+      "response" : "SHARE",
+      "rt" : 1342,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"yellow center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"right-side\"class=\"blue center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div>",
+      "trial_index" : 26,
+      "type" : "self-choice"
+    },
+    "end_time" : "Tue, 02 Aug 2016 03:54:47 GMT",
+    "id" : "test2",
+    "start_time" : "Tue, 02 Aug 2016 03:53:50 GMT"
+  },
+  "YeyvspU4PXTqNRo5eDi0gsHCkyM2" : {
+    "-KO8NTFIu_NltF50FHDN" : {
+      "is_training" : true,
+      "number" : 4,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">4</p><div id=\"is-training\"></div>",
+      "trial_index" : 5,
+      "type" : "number"
+    },
+    "-KO8NTyHiPwYZapZthK4" : {
+      "earned_value" : 4,
+      "is_training" : true,
+      "private_value" : 4,
+      "response" : "PRIVATE",
+      "rt" : 1434,
+      "share_value" : 1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star4.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star1.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 6,
+      "type" : "number-choice"
+    },
+    "-KO8NUc6rUESNk2ZFTp2" : {
+      "is_training" : true,
+      "number" : 4,
+      "rt" : 1170,
+      "statement" : "I attend a pottery class",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I attend a pottery class</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 7,
+      "type" : "self"
+    },
+    "-KO8NVEDKaqNww5Z6gC8" : {
+      "earned_value" : 0,
+      "is_training" : true,
+      "private_value" : 1,
+      "rt" : -1,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star1.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 8,
+      "type" : "self-choice"
+    },
+    "-KO8NVzLfsJm1TlFZ0VP" : {
+      "earned_value" : 4,
+      "is_training" : true,
+      "private_value" : 1,
+      "response" : "SHARE",
+      "rt" : 574,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star1.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 10,
+      "type" : "self-choice"
+    },
+    "-KO8NXUynFIsV5AnbyiE" : {
+      "is_training" : false,
+      "number" : 3,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">3</p>",
+      "trial_index" : 13,
+      "type" : "number"
+    },
+    "-KO8NYEJ3jbtcU-X5pdL" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 2,
+      "response" : "SHARE",
+      "rt" : 1525,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div>",
+      "trial_index" : 14,
+      "type" : "number-choice"
+    },
+    "-KO8NZCsmGvbHOmPwSOA" : {
+      "is_training" : false,
+      "rt" : -1,
+      "statement" : "I watch sports games with friends",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I watch sports games with friends</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 15,
+      "type" : "self"
+    },
+    "-KO8NZumwasFJwCvcdNg" : {
+      "is_training" : false,
+      "number" : 3,
+      "rt" : 369,
+      "statement" : "I watch sports games with friends",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I watch sports games with friends</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 17,
+      "type" : "self"
+    },
+    "-KO8N_Ttca-aHORlarth" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 4,
+      "response" : "PRIVATE",
+      "rt" : 806,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star4.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 18,
+      "type" : "self-choice"
+    },
+    "-KO8NbMmswsEWKwt8ikG" : {
+      "is_training" : false,
+      "number" : 4,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">4</p>",
+      "trial_index" : 21,
+      "type" : "number"
+    },
+    "-KO8NbuZ8klzets6ODu8" : {
+      "earned_value" : 2,
+      "is_training" : false,
+      "private_value" : 2,
+      "response" : "PRIVATE",
+      "rt" : 721,
+      "share_value" : 1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star2.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star1.png\"></div></div>",
+      "trial_index" : 22,
+      "type" : "number-choice"
+    },
+    "-KO8NcXmGIJ2lebz2rHh" : {
+      "is_training" : false,
+      "number" : 3,
+      "rt" : 1071,
+      "statement" : "I prefer to live somewhere warm where it never snows",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I prefer to live somewhere warm where it never snows</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 23,
+      "type" : "self"
+    },
+    "-KO8Nd8wojPvXNplL_dQ" : {
+      "earned_value" : 0,
+      "is_training" : false,
+      "private_value" : 3,
+      "rt" : -1,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div>",
+      "trial_index" : 24,
+      "type" : "self-choice"
+    },
+    "-KO8Ndum6lB0GhsVHM4v" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 3,
+      "response" : "SHARE",
+      "rt" : 614,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div>",
+      "trial_index" : 26,
+      "type" : "self-choice"
+    },
+    "end_time" : "Tue, 02 Aug 2016 03:53:20 GMT",
+    "id" : "test1",
+    "start_time" : "Tue, 02 Aug 2016 03:52:19 GMT"
+  },
+  "qIInq2coaobhzW0agIgYcOnLXlZ2" : {
+    "-KO8Xa4_gGXVCD4ghQhM" : {
+      "is_training" : true,
+      "number" : 1,
+      "rt" : 1224,
+      "statement" : "I browse videos on YouTube",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I browse videos on YouTube</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 5,
+      "type" : "self"
+    },
+    "-KO8Xad4oQojDJlBD2rJ" : {
+      "earned_value" : 1,
+      "is_training" : true,
+      "private_value" : 1,
+      "response" : "SHARE",
+      "rt" : 764,
+      "share_value" : 1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star1.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star1.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 6,
+      "type" : "self-choice"
+    },
+    "-KO8XaskHQrx3jEbwI-D" : {
+      "is_training" : true,
+      "number" : 3,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">3</p><div id=\"is-training\"></div>",
+      "trial_index" : 7,
+      "type" : "number"
+    },
+    "-KO8XbRADPnDcn0vyyuM" : {
+      "earned_value" : 1,
+      "is_training" : true,
+      "private_value" : 1,
+      "response" : "SHARE",
+      "rt" : 760,
+      "share_value" : 1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star1.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star1.png\"></div></div><div id=\"is-training\"></div>",
+      "trial_index" : 8,
+      "type" : "number-choice"
+    },
+    "-KO8Xd2Cc2iQGj8HzoQp" : {
+      "is_training" : false,
+      "number" : 1,
+      "rt" : 918,
+      "statement" : "I enjoy spending time in nature",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I enjoy spending time in nature</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 11,
+      "type" : "self"
+    },
+    "-KO8XdYF3L8T3vlIgpaZ" : {
+      "earned_value" : 3,
+      "is_training" : false,
+      "private_value" : 4,
+      "response" : "SHARE",
+      "rt" : 546,
+      "share_value" : 3,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star4.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star3.png\"></div></div>",
+      "trial_index" : 12,
+      "type" : "self-choice"
+    },
+    "-KO8XdmzdhAGvYsCE4Ee" : {
+      "is_training" : false,
+      "number" : 3,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">3</p>",
+      "trial_index" : 13,
+      "type" : "number"
+    },
+    "-KO8XeLLqgHd7VWInKg0" : {
+      "earned_value" : 3,
+      "is_training" : false,
+      "private_value" : 3,
+      "response" : "PRIVATE",
+      "rt" : 760,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 14,
+      "type" : "number-choice"
+    },
+    "-KO8XgQp8fX5RSGHxRJp" : {
+      "is_training" : false,
+      "number" : 1,
+      "rt" : 600,
+      "statement" : "I go bowling with friends",
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><p class=\"fixed-position-mid\">I go bowling with friends</p><div class=\"likert\"><div id=\"one\" class=\"cell\"><p>1<br/><span class=\"small\">Strongly disagree</span></p></div><div id=\"two\" class=\"cell\"><p>2</p></div><div id=\"three\" class=\"cell\"><p>3</p></div><div id=\"four\" class=\"cell\"><p>4</p></div><div id=\"five\" class=\"cell\"><p>5<br/><span class=\"small\">Strongly agree</span></p></div></div>",
+      "trial_index" : 17,
+      "type" : "self"
+    },
+    "-KO8XgvM8NyC34yvZFiV" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 4,
+      "response" : "PRIVATE",
+      "rt" : 514,
+      "share_value" : 2,
+      "stimulus" : "<p class=\"large fixed-position-above green\">SELF</p><div class=\"two-cards\"><div id=\"left-side\" class=\"blue center-content cards left\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star4.png\"></div><div id=\"right-side\"class=\"yellow center-content cards right\"><p>SHARE</p><img class=\"reward\" src=\"img/star2.png\"></div></div>",
+      "trial_index" : 18,
+      "type" : "self-choice"
+    },
+    "-KO8XhA2kg1nFR04efRF" : {
+      "is_training" : false,
+      "number" : 4,
+      "rt" : -1,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><p>The number for this trial is</p><p class=\"very-large center-content\">4</p>",
+      "trial_index" : 19,
+      "type" : "number"
+    },
+    "-KO8XhgCAm_L-5vy_iQI" : {
+      "earned_value" : 4,
+      "is_training" : false,
+      "private_value" : 3,
+      "response" : "SHARE",
+      "rt" : 617,
+      "share_value" : 4,
+      "stimulus" : "<p class=\"large fixed-position-above green\">NUMBER</p><div class=\"two-cards\"><div id=\"right-side\" class=\"blue center-content cards right\"><p>PRIVATE</p><img class=\"reward\" src=\"img/star3.png\"></div><div id=\"left-side\"class=\"yellow center-content cards left\"><p>SHARE</p><img class=\"reward\" src=\"img/star4.png\"></div></div>",
+      "trial_index" : 20,
+      "type" : "number-choice"
+    },
+    "end_time" : "Tue, 02 Aug 2016 04:37:16 GMT",
+    "id" : "test3",
+    "start_time" : "Tue, 02 Aug 2016 04:36:33 GMT"
+  }
+}

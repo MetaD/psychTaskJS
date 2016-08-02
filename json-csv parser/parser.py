@@ -11,108 +11,51 @@ from collections import OrderedDict
 
 def parse(json_obj, data_file):
     # 1) Get CSV Headers
-    data_header = ["subject ID", "start time", "end time"]  # same for full_data and original_data
-    history_header = ["subject ID", "start time", "end time"]
-    num_common_columns = len(data_header)
+    header = ["subject ID", "start time", "end time"]
+    trial_attributes = ["type", "trial_index", "is_training", "stimulus", "rt",      # for all trials
+                        "number",       # for number and self trials
+                        "statement",    # for self trials
+                        "response", "share_value", "private_value", "earned_value"]  # for private/share choice trials
+    num_non_trial_column = len(header)
 
-    # i) find out the length of history_header
-    subject = json_obj[json_obj.keys()[1]]
-    num_emotions = len(subject) - num_common_columns
-    max_history_lengths = [0] * num_emotions  # initialize an zero list
-    # iterate through subjects
-    for subject in json_obj:
-        emotion_index = -1
-        for emotion in json_obj[subject]:
-            if emotion[0].islower():  # not an emotion
-                continue
-            emotion_index += 1
-            current_history_length = len(json_obj[subject][emotion]["history"])
-            if current_history_length > max_history_lengths[emotion_index]:
-                max_history_lengths[emotion_index] = current_history_length
+    # iterate through subjects to find out the length of header (i.e. the max number of trials)
+    max_num_trials = 0
+    for subjectId in json_obj:
+        current_num_trials = len(json_obj[subjectId]) - num_non_trial_column
+        if current_num_trials > max_num_trials:
+            max_num_trials = current_num_trials
 
-    # ii) iterate through emotions
-    subject = json_obj[json_obj.keys()[1]]
-    emotion_index = -1
-    for emotion in subject:
-        if emotion[0].islower():  # not an emotion
-            continue
-        emotion_index += 1
-        # create data header
-        data_header.append(emotion + "/index")
-        for pt in range(0, len(subject[emotion]["full_data"])):
-            point_label = subject[emotion]["full_data"][pt][2]
-            data_header.append(emotion + "/" + str(point_label) + "/x")
-            data_header.append(emotion + "/" + str(point_label) + "/y")
-        for event in range(1, max_history_lengths[emotion_index] + 1):
-            history_header.append(emotion + "/event_" + str(event) + "/name")
-            history_header.append(emotion + "/event_" + str(event) + "/time")
-            history_header.append(emotion + "/event_" + str(event) + "/point/x")
-            history_header.append(emotion + "/event_" + str(event) + "/point/y")
-            history_header.append(emotion + "/event_" + str(event) + "/point/label")
+    # create header
+    for trial_index in range(1, max_num_trials + 1):
+        for attribute in trial_attributes:
+            header.append("trial_" + str(trial_index) + "/" + attribute)
 
-    # iii) write headers to files
-    data_file.writerow(header)
+    data_file.writerow(header)  # write to file
 
     # 2) Get Subject Data
     for firebaseSubjectId in json_obj:
         subject = json_obj[firebaseSubjectId]
+        if "id" not in subject:  # invalid subject?
+            continue
         subject_id = subject["id"]
         start_time = subject["start_time"]
         if "end_time" in subject:
             end_time = subject["end_time"]
         else:
             end_time = ''   # no end time means the participant did not finish
-        csv_full_data_row = [subject_id, start_time, end_time]
-        csv_history_row = [subject_id, start_time, end_time]
-        csv_original_data_row = [subject_id, start_time, end_time]
-        history_header_index = num_common_columns
-        original_header_index = num_common_columns
-        for emotion in subject:
-            if emotion[0].islower():  # not an emotion
+        csv_row = [subject_id, start_time, end_time]
+        for trialId in subject:
+            if trialId == "id" or trialId == "start_time" or trialId == "end_time":  # not a trial
                 continue
-            json_full_data = subject[emotion]["full_data"]
-            json_history = subject[emotion]["history"]
-            json_original_data = subject[emotion]["original_data"]
-
-            # full_data
-            csv_full_data_row.append(subject[emotion]["index"])
-            for point in json_full_data:
-                csv_full_data_row.append(point[0])
-                csv_full_data_row.append(point[1])
-
-            # history
-            for event in json_history:
-                csv_history_row.append(event["event"])
-                csv_history_row.append(event["time"])
-                if "point" in event:
-                    csv_history_row.append(event["point"][0])   # point x
-                    csv_history_row.append(event["point"][1])   # point y
-                    csv_history_row.append(event["point"][2])   # point label
+            json_trial_data = subject[trialId]
+            for attribute in trial_attributes:
+                if attribute in json_trial_data:
+                    csv_row.append(json_trial_data[attribute])
                 else:
-                    for i in range(0, 3):
-                        csv_history_row.append("")
-                history_header_index += 5
-            while history_header_index < len(history_header) and emotion in history_header[history_header_index]:
-                csv_history_row.append("")
-                history_header_index += 1
-
-            # original_data
-            csv_original_data_row.append(subject[emotion]["index"])
-            original_header_index += 1
-            for point in json_original_data:
-                label = str(point[2])
-                while label not in data_header[original_header_index]:
-                    csv_original_data_row.append('')
-                    original_header_index += 1
-                csv_original_data_row.append(point[0])
-                csv_original_data_row.append(point[1])
-                original_header_index += 2
-            while original_header_index < len(data_header) and emotion in data_header[original_header_index]:
-                csv_original_data_row.append("")
-                original_header_index += 1
+                    csv_row.append("")
 
         # write to files
-        data_file.writerow(data_row)
+        data_file.writerow(csv_row)
 
 
 if __name__ == "__main__":
