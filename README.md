@@ -3,9 +3,9 @@
 - [Issues](#issues)
 - [Files](#files)
 - [How to make changes](#how-to-make-changes)
-  - [Change statements](#Change-statements)
-  - [Change numbers](#Change-statements)
-  - [Change instructions](#Change-instructions)
+  - [Change statements](#change-statements)
+  - [Change numbers](#change-statements)
+  - [Change instructions](#change-instructions)
     - [Tips](#tips)
     - [How to add a page of instruction](#how-to-add-a-page-of-instruction)
   - [Change ID validation](#change-id-validation)
@@ -13,7 +13,6 @@
 - [How to read the data](#how-to-read-the-data)
 
 ## Issues
----
 - Change some statements for people from other places?
   - "I visit a part of _Boston_ I've never been to"
 
@@ -40,7 +39,6 @@
   - `jspsych.css` is mostly copy-pasted from the css file of jsPsych, but about 100 lines at the beginning were added for just this experiment.
 
 ## How to make changes
----
 #### Change statements
 Statements are stored in `statements_personal.js`.
 
@@ -87,7 +85,7 @@ Currently a "valid" ID is either anything 5 characters long, or "test". You can 
 - Put `parser.py` and the json data file in the same folder, and then run `parser.py` with the name of the data file as a command line parameter, like this:
 
   `python parser.py example_data.json`
-- You should get the `.csv` files in the same folder
+- You should get the `.csv` file in the same folder
 
 ## How to read the data
 Data is organized in this way:
