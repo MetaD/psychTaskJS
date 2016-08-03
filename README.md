@@ -89,7 +89,7 @@ Currently a "valid" ID is either anything 5 characters long, or "test". You can 
 - You should get the `.csv` file in the same folder
 
 ## How to read the data
-Data is organized in this way:
+Data are organized in this way:
 - Data file
   - Subject 1
     - ID
