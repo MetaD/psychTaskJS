@@ -70,8 +70,8 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
     // RANDOMIZATION
-    shuffle_array(statements);
-    shuffle_array(statements_train);
+    statements = shuffle_array(statements);
+    statements_train = shuffle_array(statements_train);
 
     // TRIALS
     // Note: only data from trials with on_finish function are recorded
