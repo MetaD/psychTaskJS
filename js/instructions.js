@@ -59,7 +59,7 @@ var RECEIVER_INSTR = 'Critically, you will be generating information for your st
 var TRAINING_START_INSTR = 'Let\'s try a few to get a feel for the task.';
 
 var TRAINING_END_INSTR = 'If you have any questions about the task, please contact the experimenter.<br/><br/>' +
-            'If you understand these instructions, please press "=" to BEGIN';
+            'If you understand these instructions, please press Enter to BEGIN';
 
 var EXPERIMENT_END_INSTR = 'Thank you for participating!';
 
@@ -152,7 +152,7 @@ var beginningInstructions = [
 var middleInstruction = {   // This appears after training
     type: 'instructions',
     pages: [TRAINING_END_INSTR],
-    key_forward: '=',
+    key_forward: 'enter',
 }
 
 var endInstruction = {
