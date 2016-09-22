@@ -14,7 +14,7 @@ https://metad.github.io/sharingTask/
 - [How to read the data](#how-to-read-the-data)
 
 ## Issues
-- Change some statements for people from other places?
+- The four statements below have been removed
   - "I visit a part of _Boston_ I've never been to"
 
   if doing it outside US:
