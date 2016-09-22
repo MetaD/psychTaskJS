@@ -16,8 +16,6 @@ https://metad.github.io/sharingTask/
 ## Issues
 - The four statements below have been removed
   - "I visit a part of _Boston_ I've never been to"
-
-  if doing it outside US:
   - "I would like to travel more to _states_ in the _United States_"
   - "I would like to travel to countries outside the _United States_"
   - "I look forward to spending _Thanksgiving_ at home"
